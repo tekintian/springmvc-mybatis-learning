@@ -9,12 +9,12 @@ import java.util.List;
 /**
  * Created by Brian on 2016/2/24.
  */
-public class UserDaoImpl implements UserDao {
+public class UserDao implements UserDaoImpl {
     // 需要向dao实现类中注入SqlSessionFactory
     // 这里通过构造方法注入
     private SqlSessionFactory sqlSessionFactory;
 
-    public UserDaoImpl(SqlSessionFactory sqlSessionFactory) {
+    public UserDao(SqlSessionFactory sqlSessionFactory) {
         this.sqlSessionFactory = sqlSessionFactory;
     }
 
