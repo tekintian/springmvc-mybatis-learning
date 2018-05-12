@@ -58,7 +58,7 @@ log4j.appender.stdout.layout.ConversionPattern=%5p [%t] - %m%n
             <!-- 数据库连接池,由mybatis管理-->
             <dataSource type="POOLED">
                 <property name="driver" value="com.mysql.jdbc.Driver" />
-                <property name="url" value="jdbc:mysql://120.25.162.238:3306/mybatis001?characterEncoding=utf-8" />
+                <property name="url" value="jdbc:mysql://192.168.1.8:3306/mybatis_demo?characterEncoding=utf-8&amp;useSSL=false" />
                 <property name="username" value="root" />
                 <property name="password" value="123" />
             </dataSource>
@@ -92,7 +92,7 @@ log4j.appender.stdout.layout.ConversionPattern=%5p [%t] - %m%n
 
      resultType：指定sql输出结果的映射的java对象类型，select指定resultType表示将单条记录映射成java对象
      -->
-    <select id="findUserById" parameterType="int" resultType="com.iot.mybatis.po.User">
+    <select id="findUserById" parameterType="int" resultType="cn.tekin.mybatis.po.User">
         SELECT * FROM  user  WHERE id=#{value}
     </select>
 
@@ -102,7 +102,7 @@ log4j.appender.stdout.layout.ConversionPattern=%5p [%t] - %m%n
 	使用${}拼接sql，引起 sql注入
 	${value}：接收输入参数的内容，如果传入类型是简单类型，${}中只能使用value
 	 -->
-    <select id="findUserByName" parameterType="java.lang.String" resultType="com.iot.mybatis.po.User">
+    <select id="findUserByName" parameterType="java.lang.String" resultType="cn.tekin.mybatis.po.User">
         SELECT * FROM user WHERE username LIKE '%${value}%'
     </select>
 
@@ -127,7 +127,7 @@ log4j.appender.stdout.layout.ConversionPattern=%5p [%t] - %m%n
 - po类`User.java`
 
 ```java
-package com.iot.mybatis.po;
+package cn.tekin.mybatis.po;
 
 import java.util.Date;
 
@@ -195,9 +195,9 @@ public class User {
 - 测试代码
 
 ```java
-package com.iot.mybatis.first;
+package cn.tekin.mybatis.first;
 
-import com.iot.mybatis.po.User;
+import cn.tekin.mybatis.po.User;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;

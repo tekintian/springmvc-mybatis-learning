@@ -1,4 +1,4 @@
-package com.iot.mybatis.po;
+package cn.tekin.mybatis.po;
 
 public class Orderdetail {
     private Integer id;

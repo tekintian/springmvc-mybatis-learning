@@ -90,7 +90,7 @@ private List<Orderdetail> orderdetails;
 <!-- 订单及订单明细的resultMap
 使用extends继承，不用在中配置订单信息和用户信息的映射
  -->
-<resultMap type="com.iot.mybatis.po.Orders" id="OrdersAndOrderDetailResultMap" extends="OrdersUserResultMap">
+<resultMap type="cn.tekin.mybatis.po.Orders" id="OrdersAndOrderDetailResultMap" extends="OrdersUserResultMap">
     <!-- 订单信息 -->
     <!-- 用户信息 -->
     <!-- 使用extends继承，不用在中配置订单信息和用户信息的映射 -->
@@ -99,12 +99,12 @@ private List<Orderdetail> orderdetails;
     <!-- 订单明细信息
     一个订单关联查询出了多条明细，要使用collection进行映射
     collection：对关联查询到多条记录映射到集合对象中
-    property：将关联查询到多条记录映射到com.iot.mybatis.po.Orders哪个属性
+    property：将关联查询到多条记录映射到cn.tekin.mybatis.po.Orders哪个属性
     ofType：指定映射到list集合属性中pojo的类型
      -->
-    <collection property="orderdetails" ofType="com.iot.mybatis.po.Orderdetail">
+    <collection property="orderdetails" ofType="cn.tekin.mybatis.po.Orderdetail">
         <!-- id：订单明细唯 一标识
-        property:要将订单明细的唯 一标识 映射到com.iot.mybatis.po.Orderdetail的哪个属性
+        property:要将订单明细的唯 一标识 映射到cn.tekin.mybatis.po.Orderdetail的哪个属性
           -->
         <id column="orderdetail_id" property="id"/>
         <result column="items_id" property="itemsId"/>

@@ -1,4 +1,4 @@
-package com.iot.mybatis.po;
+package cn.tekin.mybatis.po;
 
 import java.util.Date;
 import java.util.List;

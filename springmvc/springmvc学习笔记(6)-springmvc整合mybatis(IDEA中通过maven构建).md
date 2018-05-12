@@ -62,7 +62,7 @@ pom.xml文件
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.iot.learnssm</groupId>
+    <groupId>cn.tekin.learnssm</groupId>
     <artifactId>learnssm-firstssm</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
@@ -174,7 +174,7 @@ pom.xml文件
 
 这里我的包为：
 
-`com.iot.learnssm.firstssm`
+`cn.tekin.learnssm.firstssm`
 
 包含几个子包：
 
@@ -194,7 +194,7 @@ pom.xml文件
 
 ----
 
-> 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)
+[云南网](http://www.yunnan.ws/)
 
 
 

@@ -42,7 +42,7 @@ springmvc提供全局异常处理器（一个系统只有一个异常处理器�
 对不同的异常类型定义异常类，继承Exception。
 
 ```java
-package com.iot.learnssm.firstssm.exception;
+package cn.tekin.learnssm.firstssm.exception;
 
 /**
  * Created by brian on 2016/3/7.
@@ -149,7 +149,7 @@ ${message}
 <!-- 全局异常处理器
 只要实现HandlerExceptionResolver接口就是全局异常处理器
 -->
-<bean class="com.iot.learnssm.firstssm.exception.CustomExceptionResolver"></bean>
+<bean class="cn.tekin.learnssm.firstssm.exception.CustomExceptionResolver"></bean>
 ```
 
 全局异常处理器只有一个，配置多个也没用。
@@ -213,4 +213,4 @@ public ItemsCustom findItemsById(Integer id) throws Exception {
 
 ----
 
-> 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)
+[云南网](http://www.yunnan.ws/)

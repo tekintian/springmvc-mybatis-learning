@@ -1,6 +1,6 @@
-package com.iot.learnssm.firstssm.po;
+package cn.tekin.learnssm.firstssm.po;
 
-import com.iot.learnssm.firstssm.controller.converter.validation.ValidGroup1;
+import cn.tekin.learnssm.firstssm.controller.converter.validation.ValidGroup1;
 
 import java.util.Date;
 import javax.validation.constraints.NotNull;

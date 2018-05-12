@@ -48,7 +48,7 @@ resultMap可以实现高级映射（使用`association`、`collection`实现一�
 通过上边查询到的订单信息中user_id去关联查询用户信息,使用UserMapper.xml中的findUserById
 
 ```xml
-<select id="findUserById" parameterType="int" resultType="com.iot.mybatis.po.User">
+<select id="findUserById" parameterType="int" resultType="cn.tekin.mybatis.po.User">
     SELECT * FROM  user  WHERE id=#{value}
 </select>
 ```
@@ -60,7 +60,7 @@ resultMap可以实现高级映射（使用`association`、`collection`实现一�
 
 ```xml
 <!-- 延迟加载的resultMap -->
-<resultMap type="com.iot.mybatis.po.Orders" id="OrdersUserLazyLoadingResultMap">
+<resultMap type="cn.tekin.mybatis.po.Orders" id="OrdersUserLazyLoadingResultMap">
     <!--对订单信息进行映射配置  -->
     <id column="id" property="id"/>
     <result column="user_id" property="userId"/>
@@ -77,8 +77,8 @@ resultMap可以实现高级映射（使用`association`、`collection`实现一�
     (SELECT sex FROM USER WHERE orders.user_id = user.id)sex
      FROM orders
      -->
-    <association property="user"  javaType="com.iot.mybatis.po.User"
-                 select="com.iot.mybatis.mapper.UserMapper.findUserById"
+    <association property="user"  javaType="cn.tekin.mybatis.po.User"
+                 select="cn.tekin.mybatis.mapper.UserMapper.findUserById"
                  column="user_id">
      <!-- 实现对用户信息进行延迟加载 -->
 
@@ -90,8 +90,8 @@ resultMap可以实现高级映射（使用`association`、`collection`实现一�
 **与非延迟加载的主要区别就在`association`标签属性多了`select`和`column`**
 
 ```xml
-<association property="user"  javaType="com.iot.mybatis.po.User"
-             select="com.iot.mybatis.mapper.UserMapper.findUserById"
+<association property="user"  javaType="cn.tekin.mybatis.po.User"
+             select="cn.tekin.mybatis.mapper.UserMapper.findUserById"
              column="user_id">
 ```
 
@@ -105,7 +105,7 @@ public List<Orders> findOrdersUserLazyLoading()throws Exception;
 
 
 - 测试思路
-  - 执行上边mapper方法(`findOrdersUserLazyLoading`)，内部去调用`com.iot.mybatis.mapper.OrdersMapperCustom`中的`findOrdersUserLazyLoading`只查询orders信息（单表）。
+  - 执行上边mapper方法(`findOrdersUserLazyLoading`)，内部去调用`cn.tekin.mybatis.mapper.OrdersMapperCustom`中的`findOrdersUserLazyLoading`只查询orders信息（单表）。
    - 在程序中去遍历上一步骤查询出的List<Orders>，当我们调用Orders中的getUser方法时，开始进行延迟加载。
    - 延迟加载，去调用UserMapper.xml中findUserbyId这个方法获取用户信息。
 

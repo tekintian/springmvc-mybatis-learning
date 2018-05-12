@@ -1,7 +1,7 @@
-package com.iot.ssm.mapper;
+package cn.tekin.ssm.mapper;
 
-import com.iot.ssm.po.Items;
-import com.iot.ssm.po.ItemsExample;
+import cn.tekin.ssm.po.Items;
+import cn.tekin.ssm.po.ItemsExample;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;

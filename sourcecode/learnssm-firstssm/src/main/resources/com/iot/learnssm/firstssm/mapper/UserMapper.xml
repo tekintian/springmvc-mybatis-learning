@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.iot.learnssm.firstssm.mapper.UserMapper">
-    <resultMap id="BaseResultMap" type="com.iot.learnssm.firstssm.po.User">
+<mapper namespace="cn.tekin.learnssm.firstssm.mapper.UserMapper">
+    <resultMap id="BaseResultMap" type="cn.tekin.learnssm.firstssm.po.User">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="username" property="username" jdbcType="VARCHAR"/>
         <result column="birthday" property="birthday" jdbcType="DATE"/>
@@ -69,7 +69,7 @@
     <sql id="Base_Column_List">
         id, username, birthday, sex, address
     </sql>
-    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.iot.learnssm.firstssm.po.UserExample">
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.tekin.learnssm.firstssm.po.UserExample">
         select
         <if test="distinct">
             distinct
@@ -93,19 +93,19 @@
         delete from user
         where id = #{id,jdbcType=INTEGER}
     </delete>
-    <delete id="deleteByExample" parameterType="com.iot.learnssm.firstssm.po.UserExample">
+    <delete id="deleteByExample" parameterType="cn.tekin.learnssm.firstssm.po.UserExample">
         delete from user
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
     </delete>
-    <insert id="insert" parameterType="com.iot.learnssm.firstssm.po.User">
+    <insert id="insert" parameterType="cn.tekin.learnssm.firstssm.po.User">
         insert into user (id, username, birthday,
         sex, address)
         values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE},
         #{sex,jdbcType=CHAR}, #{address,jdbcType=VARCHAR})
     </insert>
-    <insert id="insertSelective" parameterType="com.iot.learnssm.firstssm.po.User">
+    <insert id="insertSelective" parameterType="cn.tekin.learnssm.firstssm.po.User">
         insert into user
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -142,7 +142,7 @@
             </if>
         </trim>
     </insert>
-    <select id="countByExample" parameterType="com.iot.learnssm.firstssm.po.UserExample" resultType="java.lang.Integer">
+    <select id="countByExample" parameterType="cn.tekin.learnssm.firstssm.po.UserExample" resultType="java.lang.Integer">
         select count(*) from user
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
@@ -182,7 +182,7 @@
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
     </update>
-    <update id="updateByPrimaryKeySelective" parameterType="com.iot.learnssm.firstssm.po.User">
+    <update id="updateByPrimaryKeySelective" parameterType="cn.tekin.learnssm.firstssm.po.User">
         update user
         <set>
             <if test="username != null">
@@ -200,7 +200,7 @@
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.iot.learnssm.firstssm.po.User">
+    <update id="updateByPrimaryKey" parameterType="cn.tekin.learnssm.firstssm.po.User">
         update user
         set username = #{username,jdbcType=VARCHAR},
         birthday = #{birthday,jdbcType=DATE},

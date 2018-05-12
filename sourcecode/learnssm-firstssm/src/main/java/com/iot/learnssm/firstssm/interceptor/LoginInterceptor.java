@@ -1,4 +1,4 @@
-package com.iot.learnssm.firstssm.interceptor;
+package cn.tekin.learnssm.firstssm.interceptor;
 
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;

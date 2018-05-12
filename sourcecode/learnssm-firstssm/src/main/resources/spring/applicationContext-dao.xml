@@ -31,7 +31,7 @@
     <!-- mapper扫描器 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <!-- 扫描包路径，如果需要扫描多个包，中间使用半角逗号隔开 -->
-        <property name="basePackage" value="com.iot.learnssm.firstssm.mapper"/>
+        <property name="basePackage" value="cn.tekin.learnssm.firstssm.mapper"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
         <!-- <property name="sqlSessionFactory" ref="sqlSessionFactory" />
         会导致数据源配置不管用，数据库连接不上。

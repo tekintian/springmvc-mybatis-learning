@@ -46,7 +46,7 @@ SqlMapConfig.xml中配置的内容和顺序如下
 
 ```
 jdbc.driver=com.mysql.jdbc.Driver
-jdbc.url=jdbc:mysql://120.25.162.238:3306/mybatis001?characterEncoding=utf-8
+jdbc.url=jdbc:mysql://192.168.1.8:3306/mybatis_demo?characterEncoding=utf-8&amp;useSSL=false
 jdbc.username=root
 jdbc.password=123
 ```
@@ -147,7 +147,7 @@ mybatis框架在运行时可以调整一些运行参数,比如：开启二级缓
     <!-- 批量别名定义
     指定包名，mybatis自动扫描包中的po类，自动定义别名，别名就是类名（首字母大写或小写都可以）
     -->
-    <package name="com.iot.mybatis.po"/>
+    <package name="cn.tekin.mybatis.po"/>
 
 </typeAliases>
 ```
@@ -211,13 +211,13 @@ mybatis支持类型处理器
         遵循一些规范：需要将mapper接口类名和mapper.xml映射文件名称保持一致，且在一个目录中
         上边规范的前提是：使用的是mapper代理方法
          -->
-<mapper class="com.iot.mybatis.mapper.UserMapper"/> 
+<mapper class="cn.tekin.mybatis.mapper.UserMapper"/> 
 ```
 
 目录示例
 
 ```
-com.iot.mybatis.mapper------------------package包
+cn.tekin.mybatis.mapper------------------package包
            |----UserMapper.java
            |----UserMapper.xml
               
@@ -231,7 +231,7 @@ com.iot.mybatis.mapper------------------package包
 		遵循一些规范：需要将mapper接口类名和mapper.xml映射文件名称保持一致，且在一个目录 中
 		上边规范的前提是：使用的是mapper代理方法
 		 -->
-<package name="com.iot.mybatis.mapper"/>
+<package name="cn.tekin.mybatis.mapper"/>
 ```
 
 

@@ -1,4 +1,4 @@
-package com.iot.learnssm.firstssm.po;
+package cn.tekin.learnssm.firstssm.po;
 
 public class Orderdetail {
     private Integer id;

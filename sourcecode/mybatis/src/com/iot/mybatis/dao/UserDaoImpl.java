@@ -1,6 +1,6 @@
-package com.iot.mybatis.dao;
+package cn.tekin.mybatis.dao;
 
-import com.iot.mybatis.po.User;
+import cn.tekin.mybatis.po.User;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 

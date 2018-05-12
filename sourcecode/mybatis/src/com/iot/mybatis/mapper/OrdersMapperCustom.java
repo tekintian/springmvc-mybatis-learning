@@ -1,8 +1,8 @@
-package com.iot.mybatis.mapper;
+package cn.tekin.mybatis.mapper;
 
-import com.iot.mybatis.po.Orders;
-import com.iot.mybatis.po.OrdersCustom;
-import com.iot.mybatis.po.User;
+import cn.tekin.mybatis.po.Orders;
+import cn.tekin.mybatis.po.OrdersCustom;
+import cn.tekin.mybatis.po.User;
 
 import java.util.List;
 

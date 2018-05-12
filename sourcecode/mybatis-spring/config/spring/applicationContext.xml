@@ -32,7 +32,7 @@
 
     <!-- 原始dao接口 -->
 
-    <bean id="userDao" class="com.iot.ssm.dao.UserDaoImpl">
+    <bean id="userDao" class="cn.tekin.ssm.dao.UserDaoImpl">
         <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
     </bean>
 
@@ -42,7 +42,7 @@
 
     <!-- <bean id="userMapper" class="org.ssm.spring.mapper.MapperFactoryBean">
         //mapperInterface指定mapper接口
-        <property name="mapperInterface" value="com.iot.ssm.mapper.UserMapper"/>
+        <property name="mapperInterface" value="cn.tekin.ssm.mapper.UserMapper"/>
         <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
     </bean>-->
 
@@ -54,7 +54,7 @@
         <!-- 指定扫描的包名
         如果扫描多个包，每个包中间使用半角逗号分隔
         -->
-        <property name="basePackage" value="com.iot.ssm.mapper"/>
+        <property name="basePackage" value="cn.tekin.ssm.mapper"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
 
     </bean>

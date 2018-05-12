@@ -28,7 +28,7 @@
 
 ```
 jdbc.driver=com.mysql.jdbc.Driver
-jdbc.url=jdbc:mysql://120.25.162.238:3306/mybatis001?characterEncoding=utf-8
+jdbc.url=jdbc:mysql://192.168.1.8:3306/mybatis_demo?characterEncoding=utf-8&amp;useSSL=false
 jdbc.username=root
 jdbc.password=123
 ```
@@ -62,7 +62,7 @@ mybatis自己的配置文件
     <!-- 配置别名 -->
     <typeAliases>
         <!-- 批量扫描别名 -->
-        <package name="com.iot.learnssm.firstssm.po"/>
+        <package name="cn.tekin.learnssm.firstssm.po"/>
     </typeAliases>
 
     <!-- 配置mapper
@@ -122,7 +122,7 @@ mybatis自己的配置文件
     <!-- mapper扫描器 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <!-- 扫描包路径，如果需要扫描多个包，中间使用半角逗号隔开 -->
-        <property name="basePackage" value="com.iot.learnssm.firstssm.mapper"/>
+        <property name="basePackage" value="cn.tekin.learnssm.firstssm.mapper"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
        <!-- <property name="sqlSessionFactory" ref="sqlSessionFactory" />
        会导致数据源配置不管用，数据库连接不上。
@@ -149,7 +149,7 @@ mybatis自己的配置文件
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.iot.learnssm.firstssm.mapper.ItemsMapperCustom" >
+<mapper namespace="cn.tekin.learnssm.firstssm.mapper.ItemsMapperCustom" >
 
    <!-- 定义商品查询的sql片段，就是商品查询条件 -->
    <sql id="query_items_where">
@@ -167,8 +167,8 @@ mybatis自己的配置文件
   	<!-- parameterType传入包装对象(包装了查询条件)
   		resultType建议使用扩展对象
   	 -->
-  	<select id="findItemsList" parameterType="com.iot.learnssm.firstssm.po.ItemsQueryVo"
-  		 resultType="com.iot.learnssm.firstssm.po.ItemsCustom">
+  	<select id="findItemsList" parameterType="cn.tekin.learnssm.firstssm.po.ItemsQueryVo"
+  		 resultType="cn.tekin.learnssm.firstssm.po.ItemsCustom">
   		SELECT items.* FROM items  
   		<where>
   			<include refid="query_items_where"></include>
@@ -190,7 +190,7 @@ public interface ItemsMapperCustom {
 - po类`ItemsCustom`
 
 ```java
-package com.iot.learnssm.firstssm.po;
+package cn.tekin.learnssm.firstssm.po;
 
 /**
  * Created by Brian on 2016/3/2.
@@ -204,7 +204,7 @@ public class ItemsCustom extends Items{
 - 输入pojo的包装类
 
 ```java
-package com.iot.learnssm.firstssm.po;
+package cn.tekin.learnssm.firstssm.po;
 
 /**
  * Created by Brian on 2016/3/2.
@@ -243,4 +243,4 @@ public class ItemsQueryVo {
 
 ----
 
-> 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)
+[云南网](http://www.yunnan.ws/)

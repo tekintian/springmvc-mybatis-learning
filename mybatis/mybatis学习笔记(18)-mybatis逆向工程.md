@@ -72,7 +72,7 @@ MyBatis Generator (MBG) can be run in the following ways:
 		</commentGenerator>
 		<!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
-			connectionURL="jdbc:mysql://120.25.162.238:3306/mybatis001?characterEncoding=utf-8" 
+			connectionURL="jdbc:mysql://192.168.1.8:3306/mybatis_demo?characterEncoding=utf-8&amp;useSSL=false" 
 			userId="root"
 			password="123">
 		</jdbcConnection>
@@ -89,7 +89,7 @@ MyBatis Generator (MBG) can be run in the following ways:
 		</javaTypeResolver>
 
 		<!-- targetProject:生成PO类的位置 -->
-		<javaModelGenerator targetPackage="com.iot.ssm.po"
+		<javaModelGenerator targetPackage="cn.tekin.ssm.po"
 			targetProject=".\src">
 			<!-- enableSubPackages:是否让schema作为包的后缀 -->
 			<property name="enableSubPackages" value="false" />
@@ -97,14 +97,14 @@ MyBatis Generator (MBG) can be run in the following ways:
 			<property name="trimStrings" value="true" />
 		</javaModelGenerator>
         <!-- targetProject:mapper映射文件生成的位置 -->
-		<sqlMapGenerator targetPackage="com.iot.ssm.mapper" 
+		<sqlMapGenerator targetPackage="cn.tekin.ssm.mapper" 
 			targetProject=".\src">
 			<!-- enableSubPackages:是否让schema作为包的后缀 -->
 			<property name="enableSubPackages" value="false" />
 		</sqlMapGenerator>
 		<!-- targetPackage：mapper接口生成的位置 -->
 		<javaClientGenerator type="XMLMAPPER"
-			targetPackage="com.iot.ssm.mapper" 
+			targetPackage="cn.tekin.ssm.mapper" 
 			targetProject=".\src">
 			<!-- enableSubPackages:是否让schema作为包的后缀 -->
 			<property name="enableSubPackages" value="false" />
@@ -195,15 +195,15 @@ public void generator() throws Exception{
 测试ItemsMapper中的方法
 
 ```java
-package com.iot.ssm.mapper;
+package cn.tekin.ssm.mapper;
 
 import static org.junit.Assert.*;
 
 import java.util.Date;
 import java.util.List;
 
-import com.iot.ssm.po.Items;
-import com.iot.ssm.po.ItemsExample;
+import cn.tekin.ssm.po.Items;
+import cn.tekin.ssm.po.ItemsExample;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;

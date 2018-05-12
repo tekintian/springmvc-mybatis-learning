@@ -26,8 +26,8 @@ mybatis核心,对sql语句进行灵活操作，通过表达式进行判断，对
     #{userCustom.sex}:取出pojo包装对象中性别值
     ${userCustom.username}：取出pojo包装对象中用户名称
  -->
-<select id="findUserList" parameterType="com.iot.mybatis.po.UserQueryVo"
-        resultType="com.iot.mybatis.po.UserCustom">
+<select id="findUserList" parameterType="cn.tekin.mybatis.po.UserQueryVo"
+        resultType="cn.tekin.mybatis.po.UserCustom">
     SELECT * FROM user
     <!--  where 可以自动去掉条件中的第一个and -->
     <where>
@@ -48,7 +48,7 @@ mybatis核心,对sql语句进行灵活操作，通过表达式进行判断，对
     parameterType：指定输入类型和findUserList一样
     resultType：输出结果类型
 -->
-<select id="findUserCount" parameterType="com.iot.mybatis.po.UserQueryVo" resultType="int">
+<select id="findUserCount" parameterType="cn.tekin.mybatis.po.UserQueryVo" resultType="int">
     SELECT count(*) FROM user
     <where>
         <if test="userCustom!=null">
@@ -79,8 +79,8 @@ userQueryVo.setUserCustom(userCustom);
 输出
 
 ```
-DEBUG [main] - Checking to see if class com.iot.mybatis.mapper.UserMapper matches criteria [is assignable to Object]
-DEBUG [main] - Checking to see if class com.iot.mybatis.mapper.UserMapperTest matches criteria [is assignable to Object]
+DEBUG [main] - Checking to see if class cn.tekin.mybatis.mapper.UserMapper matches criteria [is assignable to Object]
+DEBUG [main] - Checking to see if class cn.tekin.mybatis.mapper.UserMapperTest matches criteria [is assignable to Object]
 DEBUG [main] - Opening JDBC Connection
 DEBUG [main] - Created connection 352359770.
 DEBUG [main] - Setting autocommit to false on JDBC Connection [com.mysql.jdbc.JDBC4Connection@1500955a]
@@ -146,8 +146,8 @@ id：sql片段的唯 一标识
     #{userCustom.sex}:取出pojo包装对象中性别值
     ${userCustom.username}：取出pojo包装对象中用户名称
  -->
-<select id="findUserList" parameterType="com.iot.mybatis.po.UserQueryVo"
-        resultType="com.iot.mybatis.po.UserCustom">
+<select id="findUserList" parameterType="cn.tekin.mybatis.po.UserQueryVo"
+        resultType="cn.tekin.mybatis.po.UserCustom">
     SELECT * FROM user
     <!--  where 可以自动去掉条件中的第一个and -->
     <where>

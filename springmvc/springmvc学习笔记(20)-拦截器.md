@@ -103,11 +103,11 @@ springmvc配置类似全局的拦截器，springmvc框架将配置的类似全�
     <mvc:interceptor>
         <!-- /**表示所有url包括子url路径 -->
         <mvc:mapping path="/**"/>
-        <bean class="com.iot.learnssm.firstssm.interceptor.HandlerInterceptor1"></bean>
+        <bean class="cn.tekin.learnssm.firstssm.interceptor.HandlerInterceptor1"></bean>
     </mvc:interceptor>
     <mvc:interceptor>
         <mvc:mapping path="/**"/>
-        <bean class="com.iot.learnssm.firstssm.interceptor.HandlerInterceptor2"></bean>
+        <bean class="cn.tekin.learnssm.firstssm.interceptor.HandlerInterceptor2"></bean>
     </mvc:interceptor>
 </mvc:interceptors>
 ```
@@ -123,7 +123,7 @@ springmvc配置类似全局的拦截器，springmvc框架将配置的类似全�
 ```
 DEBUG [http-apr-8080-exec-1] - DispatcherServlet with name 'springmvc' processing GET request for [/ssm1/items/queryItems.action]
 DEBUG [http-apr-8080-exec-1] - Looking up handler method for path /items/queryItems.action
-DEBUG [http-apr-8080-exec-1] - Returning handler method [public org.springframework.web.servlet.ModelAndView com.iot.learnssm.firstssm.controller.ItemsController.queryItems(javax.servlet.http.HttpServletRequest,com.iot.learnssm.firstssm.po.ItemsQueryVo) throws java.lang.Exception]
+DEBUG [http-apr-8080-exec-1] - Returning handler method [public org.springframework.web.servlet.ModelAndView cn.tekin.learnssm.firstssm.controller.ItemsController.queryItems(javax.servlet.http.HttpServletRequest,cn.tekin.learnssm.firstssm.po.ItemsQueryVo) throws java.lang.Exception]
 DEBUG [http-apr-8080-exec-1] - Returning cached instance of singleton bean 'itemsController'
 DEBUG [http-apr-8080-exec-1] - Last-Modified value for [/ssm1/items/queryItems.action] is: -1
 HandlerInterceptor1...preHandle
@@ -135,7 +135,7 @@ HandlerInterceptor2...postHandle
 HandlerInterceptor1...postHandle
 DEBUG [http-apr-8080-exec-1] - Rendering view [org.springframework.web.servlet.view.JstlView: name 'items/itemsList'; URL [/WEB-INF/jsp/items/itemsList.jsp]] in DispatcherServlet with name 'springmvc'
 DEBUG [http-apr-8080-exec-1] - Added model object 'itemtypes' of type [java.util.HashMap] to request in view with name 'items/itemsList'
-DEBUG [http-apr-8080-exec-1] - Added model object 'itemsQueryVo' of type [com.iot.learnssm.firstssm.po.ItemsQueryVo] to request in view with name 'items/itemsList'
+DEBUG [http-apr-8080-exec-1] - Added model object 'itemsQueryVo' of type [cn.tekin.learnssm.firstssm.po.ItemsQueryVo] to request in view with name 'items/itemsList'
 DEBUG [http-apr-8080-exec-1] - Added model object 'org.springframework.validation.BindingResult.itemsQueryVo' of type [org.springframework.validation.BeanPropertyBindingResult] to request in view with name 'items/itemsList'
 DEBUG [http-apr-8080-exec-1] - Added model object 'itemsList' of type [java.util.ArrayList] to request in view with name 'items/itemsList'
 DEBUG [http-apr-8080-exec-1] - Forwarding to resource [/WEB-INF/jsp/items/itemsList.jsp] in InternalResourceView 'items/itemsList'
@@ -153,7 +153,7 @@ DEBUG [http-apr-8080-exec-1] - Successfully completed request
 ```
 DEBUG [http-apr-8080-exec-8] - DispatcherServlet with name 'springmvc' processing GET request for [/ssm1/items/queryItems.action]
 DEBUG [http-apr-8080-exec-8] - Looking up handler method for path /items/queryItems.action
-DEBUG [http-apr-8080-exec-8] - Returning handler method [public org.springframework.web.servlet.ModelAndView com.iot.learnssm.firstssm.controller.ItemsController.queryItems(javax.servlet.http.HttpServletRequest,com.iot.learnssm.firstssm.po.ItemsQueryVo) throws java.lang.Exception]
+DEBUG [http-apr-8080-exec-8] - Returning handler method [public org.springframework.web.servlet.ModelAndView cn.tekin.learnssm.firstssm.controller.ItemsController.queryItems(javax.servlet.http.HttpServletRequest,cn.tekin.learnssm.firstssm.po.ItemsQueryVo) throws java.lang.Exception]
 DEBUG [http-apr-8080-exec-8] - Returning cached instance of singleton bean 'itemsController'
 DEBUG [http-apr-8080-exec-8] - Last-Modified value for [/ssm1/items/queryItems.action] is: -1
 HandlerInterceptor1...preHandle
@@ -175,7 +175,7 @@ DEBUG [http-apr-8080-exec-8] - Successfully completed request
 ```
 DEBUG [http-apr-8080-exec-9] - DispatcherServlet with name 'springmvc' processing GET request for [/ssm1/items/queryItems.action]
 DEBUG [http-apr-8080-exec-9] - Looking up handler method for path /items/queryItems.action
-DEBUG [http-apr-8080-exec-9] - Returning handler method [public org.springframework.web.servlet.ModelAndView com.iot.learnssm.firstssm.controller.ItemsController.queryItems(javax.servlet.http.HttpServletRequest,com.iot.learnssm.firstssm.po.ItemsQueryVo) throws java.lang.Exception]
+DEBUG [http-apr-8080-exec-9] - Returning handler method [public org.springframework.web.servlet.ModelAndView cn.tekin.learnssm.firstssm.controller.ItemsController.queryItems(javax.servlet.http.HttpServletRequest,cn.tekin.learnssm.firstssm.po.ItemsQueryVo) throws java.lang.Exception]
 DEBUG [http-apr-8080-exec-9] - Returning cached instance of singleton bean 'itemsController'
 DEBUG [http-apr-8080-exec-9] - Last-Modified value for [/ssm1/items/queryItems.action] is: -1
 HandlerInterceptor1...preHandle
@@ -193,7 +193,7 @@ DEBUG [http-apr-8080-exec-9] - Successfully completed request
 ```
 DEBUG [http-apr-8080-exec-8] - DispatcherServlet with name 'springmvc' processing GET request for [/ssm1/items/queryItems.action]
 DEBUG [http-apr-8080-exec-8] - Looking up handler method for path /items/queryItems.action
-DEBUG [http-apr-8080-exec-8] - Returning handler method [public org.springframework.web.servlet.ModelAndView com.iot.learnssm.firstssm.controller.ItemsController.queryItems(javax.servlet.http.HttpServletRequest,com.iot.learnssm.firstssm.po.ItemsQueryVo) throws java.lang.Exception]
+DEBUG [http-apr-8080-exec-8] - Returning handler method [public org.springframework.web.servlet.ModelAndView cn.tekin.learnssm.firstssm.controller.ItemsController.queryItems(javax.servlet.http.HttpServletRequest,cn.tekin.learnssm.firstssm.po.ItemsQueryVo) throws java.lang.Exception]
 DEBUG [http-apr-8080-exec-8] - Returning cached instance of singleton bean 'itemsController'
 DEBUG [http-apr-8080-exec-8] - Last-Modified value for [/ssm1/items/queryItems.action] is: -1
 HandlerInterceptor1...preHandle
@@ -333,7 +333,7 @@ public class LoginInterceptor implements HandlerInterceptor {
     <!-- 登陆认证拦截器 -->
     <mvc:interceptor>
         <mvc:mapping path="/**"/>
-        <bean class="com.iot.learnssm.firstssm.interceptor.LoginInterceptor"></bean>
+        <bean class="cn.tekin.learnssm.firstssm.interceptor.LoginInterceptor"></bean>
     </mvc:interceptor>
     
     ...省略
@@ -343,4 +343,4 @@ public class LoginInterceptor implements HandlerInterceptor {
 
 ----
 
-> 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)
+[云南网](http://www.yunnan.ws/)

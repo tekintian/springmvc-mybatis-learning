@@ -57,7 +57,7 @@ mybaits的二级缓存是mapper范围级别，除了在SqlMapConfig.xml设置二
 在UserMapper.xml中开启二缓存，UserMapper.xml下的sql执行完成会存储到它的缓存区域（HashMap）。
 
 ```xml
-<mapper namespace="com.iot.mybatis.mapper.UserMapper">
+<mapper namespace="cn.tekin.mybatis.mapper.UserMapper">
 <!-- 开启本mapper的namespace下的二级缓存-->
 <cache />
 
@@ -121,7 +121,7 @@ public void testCache2() throws Exception {
 1.无更新，输出
 
 ```
-DEBUG [main] - Cache Hit Ratio [com.iot.mybatis.mapper.UserMapper]: 0.0
+DEBUG [main] - Cache Hit Ratio [cn.tekin.mybatis.mapper.UserMapper]: 0.0
 DEBUG [main] - Opening JDBC Connection
 DEBUG [main] - Created connection 103887628.
 DEBUG [main] - Setting autocommit to false on JDBC Connection [com.mysql.jdbc.JDBC4Connection@631330c]
@@ -132,7 +132,7 @@ User [id=1, username=测试用户22, sex=2, birthday=null, address=null]
 DEBUG [main] - Resetting autocommit to true on JDBC Connection [com.mysql.jdbc.JDBC4Connection@631330c]
 DEBUG [main] - Closing JDBC Connection [com.mysql.jdbc.JDBC4Connection@631330c]
 DEBUG [main] - Returned connection 103887628 to pool.
-DEBUG [main] - Cache Hit Ratio [com.iot.mybatis.mapper.UserMapper]: 0.5
+DEBUG [main] - Cache Hit Ratio [cn.tekin.mybatis.mapper.UserMapper]: 0.5
 User [id=1, username=测试用户22, sex=2, birthday=null, address=null]
 ```
 
@@ -140,7 +140,7 @@ User [id=1, username=测试用户22, sex=2, birthday=null, address=null]
 
 
 ```
-DEBUG [main] - Cache Hit Ratio [com.iot.mybatis.mapper.UserMapper]: 0.0
+DEBUG [main] - Cache Hit Ratio [cn.tekin.mybatis.mapper.UserMapper]: 0.0
 DEBUG [main] - Opening JDBC Connection
 DEBUG [main] - Created connection 103887628.
 DEBUG [main] - Setting autocommit to false on JDBC Connection [com.mysql.jdbc.JDBC4Connection@631330c]
@@ -151,7 +151,7 @@ User [id=1, username=测试用户22, sex=2, birthday=null, address=null]
 DEBUG [main] - Resetting autocommit to true on JDBC Connection [com.mysql.jdbc.JDBC4Connection@631330c]
 DEBUG [main] - Closing JDBC Connection [com.mysql.jdbc.JDBC4Connection@631330c]
 DEBUG [main] - Returned connection 103887628 to pool.
-DEBUG [main] - Cache Hit Ratio [com.iot.mybatis.mapper.UserMapper]: 0.5
+DEBUG [main] - Cache Hit Ratio [cn.tekin.mybatis.mapper.UserMapper]: 0.5
 DEBUG [main] - Opening JDBC Connection
 DEBUG [main] - Checked out connection 103887628 from pool.
 DEBUG [main] - Setting autocommit to false on JDBC Connection [com.mysql.jdbc.JDBC4Connection@631330c]
@@ -162,7 +162,7 @@ DEBUG [main] - Committing JDBC Connection [com.mysql.jdbc.JDBC4Connection@631330
 DEBUG [main] - Resetting autocommit to true on JDBC Connection [com.mysql.jdbc.JDBC4Connection@631330c]
 DEBUG [main] - Closing JDBC Connection [com.mysql.jdbc.JDBC4Connection@631330c]
 DEBUG [main] - Returned connection 103887628 to pool.
-DEBUG [main] - Cache Hit Ratio [com.iot.mybatis.mapper.UserMapper]: 0.3333333333333333
+DEBUG [main] - Cache Hit Ratio [cn.tekin.mybatis.mapper.UserMapper]: 0.3333333333333333
 DEBUG [main] - Opening JDBC Connection
 DEBUG [main] - Checked out connection 103887628 from pool.
 DEBUG [main] - Setting autocommit to false on JDBC Connection [com.mysql.jdbc.JDBC4Connection@631330c]

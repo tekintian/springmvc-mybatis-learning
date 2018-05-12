@@ -1,7 +1,7 @@
-package com.iot.learnssm.firstssm.controller;
+package cn.tekin.learnssm.firstssm.controller;
 
-import com.iot.learnssm.firstssm.po.ItemsCustom;
-import com.iot.learnssm.firstssm.service.ItemsService;
+import cn.tekin.learnssm.firstssm.po.ItemsCustom;
+import cn.tekin.learnssm.firstssm.service.ItemsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

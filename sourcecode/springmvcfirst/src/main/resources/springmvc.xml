@@ -3,9 +3,9 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 
     <!-- 配置Handler -->
-    <bean id="itemsController" name="/queryItems.action" class="com.iot.ssm.controller.ItemsController"/>
+    <bean id="itemsController" name="/queryItems.action" class="cn.tekin.ssm.controller.ItemsController"/>
     <!-- 配置另一个Handler -->
-    <bean id="itemsController2" class="com.iot.ssm.controller.ItemsController2"/>
+    <bean id="itemsController2" class="cn.tekin.ssm.controller.ItemsController2"/>
     <!-- 处理器映射器
     将bean的name作为url进行查找，需要在配置Handler时指定beanname(就是url)
     所有的映射器都实现了HandlerMapping接口

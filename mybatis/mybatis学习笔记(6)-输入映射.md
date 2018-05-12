@@ -7,8 +7,8 @@
 **Contents**
 
   - [传递pojo的包装对象](#传递pojo的包装对象)
-    - [Error querying database.  Cause: org.apache.ibatis.reflection.ReflectionException: There is no getter for property named 'UserCustom' in 'class com.iot.mybatis.po.UserQueryVo'](#error-querying-database--cause-orgapacheibatisreflectionreflectionexception-there-is-no-getter-for-property-named-usercustom-in-class-comiotmybatispouserqueryvo)
-    - [Cause: org.apache.ibatis.reflection.ReflectionException: There is no getter for property named 'UserCustom' in 'class com.iot.mybatis.po.UserQueryVo'](#cause-orgapacheibatisreflectionreflectionexception-there-is-no-getter-for-property-named-usercustom-in-class-comiotmybatispouserqueryvo)
+    - [Error querying database.  Cause: org.apache.ibatis.reflection.ReflectionException: There is no getter for property named 'UserCustom' in 'class cn.tekin.mybatis.po.UserQueryVo'](#error-querying-database--cause-orgapacheibatisreflectionreflectionexception-there-is-no-getter-for-property-named-usercustom-in-class-comiotmybatispouserqueryvo)
+    - [Cause: org.apache.ibatis.reflection.ReflectionException: There is no getter for property named 'UserCustom' in 'class cn.tekin.mybatis.po.UserQueryVo'](#cause-orgapacheibatisreflectionreflectionexception-there-is-no-getter-for-property-named-usercustom-in-class-comiotmybatispouserqueryvo)
 
 
 
@@ -28,7 +28,7 @@
 - 定义包装类型pojo
 
 ```java
-package com.iot.mybatis.po;
+package cn.tekin.mybatis.po;
 
 /**
  * Created by Brian on 2016/2/24.
@@ -70,8 +70,8 @@ public class UserCustom extends User{
         #{userCustom.sex}:取出pojo包装对象中性别值
         ${userCustom.username}：取出pojo包装对象中用户名称
      -->
-    <select id="findUserList" parameterType="com.iot.mybatis.po.UserQueryVo"
-            resultType="com.iot.mybatis.po.UserCustom">
+    <select id="findUserList" parameterType="cn.tekin.mybatis.po.UserQueryVo"
+            resultType="cn.tekin.mybatis.po.UserCustom">
         SELECT * FROM user WHERE user.sex=#{userCustom.sex} AND user.username LIKE '%${userCustom.username}%'
     </select>
 ```
@@ -80,8 +80,8 @@ public class UserCustom extends User{
 
 ```
 org.apache.ibatis.exceptions.PersistenceException: 
-### Error querying database.  Cause: org.apache.ibatis.reflection.ReflectionException: There is no getter for property named 'UserCustom' in 'class com.iot.mybatis.po.UserQueryVo'
-### Cause: org.apache.ibatis.reflection.ReflectionException: There is no getter for property named 'UserCustom' in 'class com.iot.mybatis.po.UserQueryVo'
+### Error querying database.  Cause: org.apache.ibatis.reflection.ReflectionException: There is no getter for property named 'UserCustom' in 'class cn.tekin.mybatis.po.UserQueryVo'
+### Cause: org.apache.ibatis.reflection.ReflectionException: There is no getter for property named 'UserCustom' in 'class cn.tekin.mybatis.po.UserQueryVo'
 ```
 
 - mapper.java

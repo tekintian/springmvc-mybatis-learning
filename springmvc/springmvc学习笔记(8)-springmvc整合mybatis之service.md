@@ -51,7 +51,7 @@ public class ItemsServiceImpl implements ItemsService {
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 
     <!-- 商品管理的service -->
-    <bean id="itemsService" class="com.iot.learnssm.firstssm.service.impl.ItemsServiceImpl"/>
+    <bean id="itemsService" class="cn.tekin.learnssm.firstssm.service.impl.ItemsServiceImpl"/>
 
 </beans>
 ```
@@ -96,7 +96,7 @@ public class ItemsServiceImpl implements ItemsService {
     </tx:advice>
     <!-- aop -->
     <aop:config>
-        <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.iot.learnssm.firstssm.service.impl.*.*(..))"/>
+        <aop:advisor advice-ref="txAdvice" pointcut="execution(* cn.tekin.learnssm.firstssm.service.impl.*.*(..))"/>
     </aop:config>
 </beans>
 ```
@@ -105,6 +105,6 @@ public class ItemsServiceImpl implements ItemsService {
 
 ----
 
-> 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)
+[云南网](http://www.yunnan.ws/)
 
 

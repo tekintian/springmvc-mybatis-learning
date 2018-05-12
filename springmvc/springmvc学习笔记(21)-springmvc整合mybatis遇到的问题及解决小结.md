@@ -74,7 +74,7 @@ D:\intellij\workspace\learnssm-firstssm>mvn dependency:tree
 [INFO] ------------------------------------------------------------------------
 [INFO]
 [INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ learnssm-firstssm ---
-[INFO] com.iot.learnssm:learnssm-firstssm:war:1.0-SNAPSHOT
+[INFO] cn.tekin.learnssm:learnssm-firstssm:war:1.0-SNAPSHOT
 [INFO] +- org.springframework:spring-core:jar:4.2.4.RELEASE:compile
 [INFO] |  \- commons-logging:commons-logging:jar:1.2:compile
 [INFO] +- org.springframework:spring-webmvc:jar:4.2.4.RELEASE:compile
@@ -262,7 +262,7 @@ debug窗里报下面的错误：
 
 debug窗里报下面的错误：
 
-`java.lang.IllegalArgumentException: No converter found for return value of type: class com.iot.learnssm.firstssm.po.ItemsCustom`
+`java.lang.IllegalArgumentException: No converter found for return value of type: class cn.tekin.learnssm.firstssm.po.ItemsCustom`
 
 参考stackoverflow的这个链接:
 
@@ -315,7 +315,7 @@ debug窗里报下面的错误：
         <property name="converters">
             <list>
                 <!-- 日期类型转换 -->
-                <bean class="com.iot.learnssm.firstssm.controller.converter.CustomDateConverter"/>
+                <bean class="cn.tekin.learnssm.firstssm.controller.converter.CustomDateConverter"/>
            </list>
         </property>
     </bean>
@@ -379,7 +379,7 @@ debug窗里报下面的错误：
 
 ```
 [INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ learnssm-firstssm ---
-[INFO] com.iot.learnssm:learnssm-firstssm:war:1.0-SNAPSHOT
+[INFO] cn.tekin.learnssm:learnssm-firstssm:war:1.0-SNAPSHOT
 [INFO] +- org.springframework:spring-webmvc:jar:4.2.4.RELEASE:compile
 [INFO] |  +- org.springframework:spring-beans:jar:4.2.4.RELEASE:compile
 [INFO] |  +- org.springframework:spring-context:jar:4.2.4.RELEASE:compile
@@ -394,5 +394,5 @@ debug窗里报下面的错误：
 
 ----
 
-> 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)
+[云南网](http://www.yunnan.ws/)
 

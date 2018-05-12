@@ -1,4 +1,4 @@
-package com.iot.ssm.po;
+package cn.tekin.ssm.po;
 
 import java.util.ArrayList;
 import java.util.Date;

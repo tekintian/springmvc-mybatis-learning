@@ -66,7 +66,7 @@
     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
     <!-- 配置Handler -->
-    <bean name="/queryItems.action" class="com.iot.ssm.controller.ItemsController"/>
+    <bean name="/queryItems.action" class="cn.tekin.ssm.controller.ItemsController"/>
 
     <!-- 处理器映射器
     将bean的name作为url进行查找，需要在配置Handler时指定beanname(就是url)
@@ -101,11 +101,11 @@
    <!-- 对于注解的Handler 可以单个配置
     实际开发中加你使用组件扫描
     -->
-    <!--  <bean  class="com.iot.ssm.controller.ItemsController3"/> -->
+    <!--  <bean  class="cn.tekin.ssm.controller.ItemsController3"/> -->
     <!-- 可以扫描controller、service、...
 	这里让扫描controller，指定controller的包
 	 -->
-    <context:component-scan base-package="com.iot.ssm.controller"></context:component-scan>
+    <context:component-scan base-package="cn.tekin.ssm.controller"></context:component-scan>
 
 
 
@@ -139,5 +139,5 @@
 
 ----
 
-> 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)
+[云南网](http://www.yunnan.ws/)
 

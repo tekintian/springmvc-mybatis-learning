@@ -1,6 +1,6 @@
-package com.iot.ssm.dao;
+package cn.tekin.ssm.dao;
 
-import com.iot.ssm.po.User;
+import cn.tekin.ssm.po.User;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;

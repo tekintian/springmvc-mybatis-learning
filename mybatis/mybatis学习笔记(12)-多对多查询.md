@@ -89,7 +89,7 @@ WHERE orders.user_id = user.id AND orderdetail.orders_id=orders.id AND orderdeta
 
 ```xml
 <!-- 查询用户及购买的商品 -->
-<resultMap type="com.iot.mybatis.po.User" id="UserAndItemsResultMap">
+<resultMap type="cn.tekin.mybatis.po.User" id="UserAndItemsResultMap">
     <!-- 用户信息 -->
     <id column="user_id" property="id"/>
     <result column="username" property="username"/>
@@ -99,7 +99,7 @@ WHERE orders.user_id = user.id AND orderdetail.orders_id=orders.id AND orderdeta
     <!-- 订单信息
     一个用户对应多个订单，使用collection映射
      -->
-    <collection property="ordersList" ofType="com.iot.mybatis.po.Orders">
+    <collection property="ordersList" ofType="cn.tekin.mybatis.po.Orders">
         <id column="id" property="id"/>
         <result column="user_id" property="userId"/>
         <result column="number" property="number"/>
@@ -109,7 +109,7 @@ WHERE orders.user_id = user.id AND orderdetail.orders_id=orders.id AND orderdeta
         <!-- 订单明细
          一个订单包括 多个明细
          -->
-        <collection property="orderdetails" ofType="com.iot.mybatis.po.Orderdetail">
+        <collection property="orderdetails" ofType="cn.tekin.mybatis.po.Orderdetail">
             <id column="orderdetail_id" property="id"/>
             <result column="items_id" property="itemsId"/>
             <result column="items_num" property="itemsNum"/>
@@ -118,7 +118,7 @@ WHERE orders.user_id = user.id AND orderdetail.orders_id=orders.id AND orderdeta
             <!-- 商品信息
              一个订单明细对应一个商品
              -->
-            <association property="items" javaType="com.iot.mybatis.po.Items">
+            <association property="items" javaType="cn.tekin.mybatis.po.Items">
                 <id column="items_id" property="id"/>
                 <result column="items_name" property="name"/>
                 <result column="items_detail" property="detail"/>

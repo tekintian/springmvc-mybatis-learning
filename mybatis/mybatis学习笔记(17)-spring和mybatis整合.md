@@ -112,7 +112,7 @@ jar包：
 
      resultType：指定sql输出结果的映射的java对象类型，select指定resultType表示将单条记录映射成java对象
      -->
-    <select id="findUserById" parameterType="int" resultType="com.iot.ssm.po.User">
+    <select id="findUserById" parameterType="int" resultType="cn.tekin.ssm.po.User">
         SELECT * FROM  user  WHERE id=#{value}
     </select>
 
@@ -164,7 +164,7 @@ public class UserDaoImpl extends SqlSessionDaoSupport implements UserDao{
 
 ```xml
 <!-- 原始dao接口 -->
-<bean id="userDao" class="com.iot.ssm.dao.UserDaoImpl">
+<bean id="userDao" class="cn.tekin.ssm.dao.UserDaoImpl">
     <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
 </bean>
 ```
@@ -221,7 +221,7 @@ public interface UserMapper {
  namespace 命名空间，作用就是对sql进行分类化管理,理解为sql隔离
  注意：使用mapper代理方法开发，namespace有特殊重要的作用
  -->
-<mapper namespace="com.iot.ssm.mapper.UserMapper">
+<mapper namespace="cn.tekin.ssm.mapper.UserMapper">
 
     <!-- 在映射文件中配置很多sql语句 -->
 
@@ -243,7 +243,7 @@ public interface UserMapper {
 
 <bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
         //mapperInterface指定mapper接口
-        <property name="mapperInterface" value="com.iot.ssm.mapper.UserMapper"/>
+        <property name="mapperInterface" value="cn.tekin.ssm.mapper.UserMapper"/>
         <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
 </bean>
 ```
@@ -262,7 +262,7 @@ public interface UserMapper {
     <!-- 指定扫描的包名
     如果扫描多个包，每个包中间使用半角逗号分隔
     -->
-    <property name="basePackage" value="com.iot.ssm.mapper"/>
+    <property name="basePackage" value="cn.tekin.ssm.mapper"/>
     <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
 
 </bean>
@@ -271,10 +271,10 @@ public interface UserMapper {
 - 测试代码
 
 ```java
-package com.iot.mybatis.mapper;
+package cn.tekin.mybatis.mapper;
 
-import com.iot.ssm.mapper.UserMapper;
-import com.iot.ssm.po.User;
+import cn.tekin.ssm.mapper.UserMapper;
+import cn.tekin.ssm.po.User;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -325,7 +325,7 @@ org.springframework.beans.factory.BeanDefinitionStoreException: Failed to read c
 	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:461)
 	at org.springframework.context.support.ClassPathXmlApplicationContext.<init>(ClassPathXmlApplicationContext.java:139)
 	at org.springframework.context.support.ClassPathXmlApplicationContext.<init>(ClassPathXmlApplicationContext.java:83)
-	at com.iot.mybatis.mapper.UserMapperTest.setUp(UserMapperTest.java:17)
+	at cn.tekin.mybatis.mapper.UserMapperTest.setUp(UserMapperTest.java:17)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)

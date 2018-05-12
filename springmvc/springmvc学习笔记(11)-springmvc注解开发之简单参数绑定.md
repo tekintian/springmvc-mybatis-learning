@@ -146,7 +146,7 @@ public class CustomDateConverter implements Converter<String,Date>{
         <property name="converters">
             <list>
                 <!-- 日期类型转换 -->
-                <bean class="com.iot.learnssm.firstssm.controller.converter.CustomDateConverter"/>
+                <bean class="cn.tekin.learnssm.firstssm.controller.converter.CustomDateConverter"/>
            </list>
         </property>
     </bean>
@@ -166,4 +166,4 @@ springmvc将url和controller方法映射。映射成功后springmvc生成一个H
 
 ----
 
-> 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)
+[云南网](http://www.yunnan.ws/)

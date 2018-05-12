@@ -1,4 +1,4 @@
-package com.iot.ssm.po;
+package cn.tekin.ssm.po;
 
 public class Orderdetail {
     private Integer id;

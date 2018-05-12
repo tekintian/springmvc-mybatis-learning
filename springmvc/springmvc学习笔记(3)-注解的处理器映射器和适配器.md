@@ -104,11 +104,11 @@ public class ItemsController3 {
 <!-- 对于注解的Handler 可以单个配置
     实际开发中加你使用组件扫描
     -->
-    <!--  <bean  class="com.iot.ssm.controller.ItemsController3"/> -->
+    <!--  <bean  class="cn.tekin.ssm.controller.ItemsController3"/> -->
     <!-- 可以扫描controller、service、...
 	这里让扫描controller，指定controller的包
 	 -->
-    <context:component-scan base-package="com.iot.ssm.controller"></context:component-scan>
+    <context:component-scan base-package="cn.tekin.ssm.controller"></context:component-scan>
 ```
 
 
@@ -121,4 +121,4 @@ public class ItemsController3 {
 
 ----
 
-> 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)
+[云南网](http://www.yunnan.ws/)

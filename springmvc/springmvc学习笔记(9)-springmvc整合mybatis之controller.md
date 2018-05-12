@@ -38,7 +38,7 @@
     <!-- 可以扫描controller、service、...
 	这里让扫描controller，指定controller的包
 	 -->
-    <context:component-scan base-package="com.iot.learnssm.firstssm.controller"></context:component-scan>
+    <context:component-scan base-package="cn.tekin.learnssm.firstssm.controller"></context:component-scan>
 
 
     <!-- 使用mvc:annotation-driven代替上面两个注解映射器和注解适配的配置
@@ -135,12 +135,12 @@
 
 
 ```java
-package com.iot.learnssm.firstssm.controller;
+package cn.tekin.learnssm.firstssm.controller;
 
 
-import com.iot.learnssm.firstssm.po.Items;
-import com.iot.learnssm.firstssm.po.ItemsCustom;
-import com.iot.learnssm.firstssm.service.ItemsService;
+import cn.tekin.learnssm.firstssm.po.Items;
+import cn.tekin.learnssm.firstssm.po.ItemsCustom;
+import cn.tekin.learnssm.firstssm.service.ItemsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -243,6 +243,6 @@ public class ItemsController {
 
 ----
 
-> 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)
+> [云南网](http://www.yunnan.ws/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)
 
 

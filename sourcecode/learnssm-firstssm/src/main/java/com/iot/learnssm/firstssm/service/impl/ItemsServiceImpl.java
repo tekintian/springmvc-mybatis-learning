@@ -1,12 +1,12 @@
-package com.iot.learnssm.firstssm.service.impl;
+package cn.tekin.learnssm.firstssm.service.impl;
 
-import com.iot.learnssm.firstssm.exception.CustomException;
-import com.iot.learnssm.firstssm.mapper.ItemsMapper;
-import com.iot.learnssm.firstssm.mapper.ItemsMapperCustom;
-import com.iot.learnssm.firstssm.po.Items;
-import com.iot.learnssm.firstssm.po.ItemsCustom;
-import com.iot.learnssm.firstssm.po.ItemsQueryVo;
-import com.iot.learnssm.firstssm.service.ItemsService;
+import cn.tekin.learnssm.firstssm.exception.CustomException;
+import cn.tekin.learnssm.firstssm.mapper.ItemsMapper;
+import cn.tekin.learnssm.firstssm.mapper.ItemsMapperCustom;
+import cn.tekin.learnssm.firstssm.po.Items;
+import cn.tekin.learnssm.firstssm.po.ItemsCustom;
+import cn.tekin.learnssm.firstssm.po.ItemsQueryVo;
+import cn.tekin.learnssm.firstssm.service.ItemsService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 

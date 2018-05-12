@@ -1,7 +1,7 @@
-package com.iot.learnssm.firstssm.service;
+package cn.tekin.learnssm.firstssm.service;
 
-import com.iot.learnssm.firstssm.po.ItemsCustom;
-import com.iot.learnssm.firstssm.po.ItemsQueryVo;
+import cn.tekin.learnssm.firstssm.po.ItemsCustom;
+import cn.tekin.learnssm.firstssm.po.ItemsQueryVo;
 
 import java.util.List;
 

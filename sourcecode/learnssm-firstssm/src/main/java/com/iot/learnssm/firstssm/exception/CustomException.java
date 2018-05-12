@@ -1,4 +1,4 @@
-package com.iot.learnssm.firstssm.exception;
+package cn.tekin.learnssm.firstssm.exception;
 
 /**
  * Created by brian on 2016/3/7.

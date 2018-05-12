@@ -35,7 +35,7 @@
         parameterType：指定输入 参数类型是pojo（包括 用户信息）
         #{}中指定pojo的属性名，接收到pojo对象的属性值，mybatis通过OGNL获取对象的属性值
         -->
-    <insert id="insertUser" parameterType="com.iot.mybatis.po.User">
+    <insert id="insertUser" parameterType="cn.tekin.mybatis.po.User">
         <!--
          将插入数据的主键返回，返回到user对象中
 
@@ -76,7 +76,7 @@
     parameterType指定user对象，包括 id和更新信息，注意：id必须存在
     #{id}：从输入 user对象中获取id属性值
      -->
-    <update id="updateUser" parameterType="com.iot.mybatis.po.User">
+    <update id="updateUser" parameterType="cn.tekin.mybatis.po.User">
         update user set username=#{username},birthday=#{birthday},sex=#{sex},address=#{address}
         where id=#{id}
     </update>

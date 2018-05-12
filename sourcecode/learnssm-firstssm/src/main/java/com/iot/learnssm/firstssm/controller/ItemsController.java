@@ -1,9 +1,9 @@
-package com.iot.learnssm.firstssm.controller;
+package cn.tekin.learnssm.firstssm.controller;
 
-import com.iot.learnssm.firstssm.controller.converter.validation.ValidGroup1;
-import com.iot.learnssm.firstssm.po.ItemsCustom;
-import com.iot.learnssm.firstssm.po.ItemsQueryVo;
-import com.iot.learnssm.firstssm.service.ItemsService;
+import cn.tekin.learnssm.firstssm.controller.converter.validation.ValidGroup1;
+import cn.tekin.learnssm.firstssm.po.ItemsCustom;
+import cn.tekin.learnssm.firstssm.po.ItemsQueryVo;
+import cn.tekin.learnssm.firstssm.service.ItemsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -1,6 +1,6 @@
-package com.iot.ssm.controller;
+package cn.tekin.ssm.controller;
 
-import com.iot.ssm.po.Items;
+import cn.tekin.ssm.po.Items;
 import org.springframework.web.HttpRequestHandler;
 
 import java.io.IOException;

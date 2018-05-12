@@ -42,7 +42,7 @@
         parameterType：指定输入类型和findUserList一样
         resultType：输出结果类型
     -->
-    <select id="findUserCount" parameterType="com.iot.mybatis.po.UserQueryVo" resultType="int">
+    <select id="findUserCount" parameterType="cn.tekin.mybatis.po.UserQueryVo" resultType="int">
         SELECT count(*) FROM user WHERE user.sex=#{userCustom.sex} AND user.username LIKE '%${userCustom.username}%'
     </select>
 ```

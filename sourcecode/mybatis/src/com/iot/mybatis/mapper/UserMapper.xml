@@ -6,7 +6,7 @@
  namespace 命名空间，作用就是对sql进行分类化管理,理解为sql隔离
  注意：使用mapper代理方法开发，namespace有特殊重要的作用
  -->
-<mapper namespace="com.iot.mybatis.mapper.UserMapper">
+<mapper namespace="cn.tekin.mybatis.mapper.UserMapper">
 
     <!-- 开启本mapper的namespace下的二级缓存
     type：指定cache接口的实现类的类型，mybatis默认使用PerpetualCache
@@ -26,7 +26,7 @@
 
      resultType：指定sql输出结果的映射的java对象类型，select指定resultType表示将单条记录映射成java对象
      -->
-    <select id="findUserById" parameterType="int" resultType="com.iot.mybatis.po.User">
+    <select id="findUserById" parameterType="int" resultType="cn.tekin.mybatis.po.User">
         SELECT * FROM user WHERE id=#{value}
     </select>
 
@@ -36,7 +36,7 @@
 	使用${}拼接sql，引起 sql注入
 	${value}：接收输入参数的内容，如果传入类型是简单类型，${}中只能使用value
 	 -->
-    <select id="findUserByName" parameterType="java.lang.String" resultType="com.iot.mybatis.po.User">
+    <select id="findUserByName" parameterType="java.lang.String" resultType="cn.tekin.mybatis.po.User">
         SELECT * FROM user WHERE username LIKE '%${value}%'
     </select>
 
@@ -44,7 +44,7 @@
         parameterType：指定输入 参数类型是pojo（包括 用户信息）
         #{}中指定pojo的属性名，接收到pojo对象的属性值，mybatis通过OGNL获取对象的属性值
         -->
-    <insert id="insertUser" parameterType="com.iot.mybatis.po.User">
+    <insert id="insertUser" parameterType="cn.tekin.mybatis.po.User">
         <!--
          将插入数据的主键返回，返回到user对象中
 
@@ -85,7 +85,7 @@
     parameterType指定user对象，包括 id和更新信息，注意：id必须存在
     #{id}：从输入 user对象中获取id属性值
      -->
-    <update id="updateUser" parameterType="com.iot.mybatis.po.User">
+    <update id="updateUser" parameterType="cn.tekin.mybatis.po.User">
         update user set username=#{username},birthday=#{birthday},sex=#{sex},address=#{address}
         where id=#{id}
     </update>
@@ -134,8 +134,8 @@
         #{userCustom.sex}:取出pojo包装对象中性别值
         ${userCustom.username}：取出pojo包装对象中用户名称
      -->
-    <select id="findUserList" parameterType="com.iot.mybatis.po.UserQueryVo"
-            resultType="com.iot.mybatis.po.UserCustom">
+    <select id="findUserList" parameterType="cn.tekin.mybatis.po.UserQueryVo"
+            resultType="cn.tekin.mybatis.po.UserCustom">
         SELECT * FROM user
         <!--  where 可以自动去掉条件中的第一个and -->
         <where>
@@ -150,7 +150,7 @@
         parameterType：指定输入类型和findUserList一样
         resultType：输出结果类型
     -->
-    <select id="findUserCount" parameterType="com.iot.mybatis.po.UserQueryVo" resultType="int">
+    <select id="findUserCount" parameterType="cn.tekin.mybatis.po.UserQueryVo" resultType="int">
         SELECT count(*) FROM user
         <where>
             <if test="userCustom!=null">

@@ -1,4 +1,4 @@
-package com.iot.learnssm.firstssm.po;
+package cn.tekin.learnssm.firstssm.po;
 
 import java.util.ArrayList;
 import java.util.Date;

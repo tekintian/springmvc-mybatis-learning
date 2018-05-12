@@ -1,4 +1,4 @@
-package com.iot.mybatis.po;
+package cn.tekin.mybatis.po;
 
 import java.io.Serializable;
 import java.util.Date;

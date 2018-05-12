@@ -1,7 +1,7 @@
-package com.iot.learnssm.firstssm.mapper;
+package cn.tekin.learnssm.firstssm.mapper;
 
-import com.iot.learnssm.firstssm.po.Items;
-import com.iot.learnssm.firstssm.po.ItemsExample;
+import cn.tekin.learnssm.firstssm.po.Items;
+import cn.tekin.learnssm.firstssm.po.ItemsExample;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

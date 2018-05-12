@@ -1,4 +1,4 @@
-package com.iot.learnssm.firstssm.exception;
+package cn.tekin.learnssm.firstssm.exception;
 
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;

@@ -1,6 +1,6 @@
-package com.iot.ssm.dao;
+package cn.tekin.ssm.dao;
 
-import com.iot.ssm.po.User;
+import cn.tekin.ssm.po.User;
 
 /**
  * Created by Brian on 2016/2/24.

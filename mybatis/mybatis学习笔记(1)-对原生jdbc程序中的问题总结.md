@@ -51,7 +51,7 @@
 ## 参考代码
 
 ```java
-package com.iot.mybatis.jdbc;
+package cn.tekin.mybatis.jdbc;
 
 //import java.sql.*;
 import java.sql.Connection;
@@ -77,7 +77,7 @@ public class JdbcTest {
             Class.forName("com.mysql.jdbc.Driver");
 
             //通过驱动管理类获取数据库链接
-            connection =  DriverManager.getConnection("jdbc:mysql://120.25.162.238:3306/mybatis001?characterEncoding=utf-8", "root", "123");
+            connection =  DriverManager.getConnection("jdbc:mysql://192.168.1.8:3306/mybatis_demo?characterEncoding=utf-8&amp;useSSL=false", "root", "123");
             //定义sql语句 ?表示占位符
             String sql = "select * from user where username = ?";
             //获取预处理statement

@@ -1,4 +1,4 @@
-package com.iot.learnssm.firstssm.po;
+package cn.tekin.learnssm.firstssm.po;
 
 /**
  * Created by Brian on 2016/3/2.

@@ -54,7 +54,7 @@ WHERE orders.user_id = user.id
 对应数据表的几个pojo类(Items,Orderdetail,Orders)就是把该类的属性名设为和数据表列字段名相同，并为这些属性添加getter和setter，在这里就不贴代码了，只贴出对应于关联查询的自定义pojo类`OrdersCustom`的代码
 
 ```java
-package com.iot.mybatis.po;
+package cn.tekin.mybatis.po;
 
 /**
  * 
@@ -105,7 +105,7 @@ public class OrdersCustom extends Orders{
 
 ```xml
  <!-- 查询订单关联查询用户信息 -->
-<select id="findOrdersUser"  resultType="com.iot.mybatis.po.OrdersCustom">
+<select id="findOrdersUser"  resultType="cn.tekin.mybatis.po.OrdersCustom">
   SELECT
       orders.*,
       user.username,
@@ -138,9 +138,9 @@ public List<OrdersCustom> findOrdersUser()throws Exception;
 
 ```xml
 <!-- 订单查询关联用户的resultMap
-将整个查询的结果映射到com.iot.mybatis.po.Orders中
+将整个查询的结果映射到cn.tekin.mybatis.po.Orders中
  -->
-<resultMap type="com.iot.mybatis.po.Orders" id="OrdersUserResultMap">
+<resultMap type="cn.tekin.mybatis.po.Orders" id="OrdersUserResultMap">
     <!-- 配置映射的订单信息 -->
     <!-- id：指定查询列中的唯一标识，订单信息的中的唯 一标识，如果有多个列组成唯一标识，配置多个id
         column：订单信息的唯一标识列
@@ -156,7 +156,7 @@ public List<OrdersCustom> findOrdersUser()throws Exception;
     <!-- association：用于映射关联查询单个对象的信息
     property：要将关联查询的用户信息映射到Orders中哪个属性
      -->
-    <association property="user"  javaType="com.iot.mybatis.po.User">
+    <association property="user"  javaType="cn.tekin.mybatis.po.User">
         <!-- id：关联查询用户的唯 一标识
         column：指定唯 一标识用户信息的列
         javaType：映射到user的哪个属性

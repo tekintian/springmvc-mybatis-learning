@@ -20,7 +20,7 @@
 
 ```xml
  <!-- 配置Handler -->
-<bean id="itemsController" name="/queryItems.action" class="com.iot.ssm.controller.ItemsController"/>
+<bean id="itemsController" name="/queryItems.action" class="cn.tekin.ssm.controller.ItemsController"/>
 
 <!-- 处理器映射器
 将bean的name作为url进行查找，需要在配置Handler时指定beanname(就是url)
@@ -58,9 +58,9 @@
 要求编写的Handler实现`HttpRequestHandler`接口
 
 ```java
-package com.iot.ssm.controller;
+package cn.tekin.ssm.controller;
 
-import com.iot.ssm.po.Items;
+import cn.tekin.ssm.po.Items;
 import org.springframework.web.HttpRequestHandler;
 
 import javax.servlet.ServletException;
@@ -114,4 +114,4 @@ response.getWriter().write("json串");
 
 ----
 
-> 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)
+[云南网](http://www.yunnan.ws/)

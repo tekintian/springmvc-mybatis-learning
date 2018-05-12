@@ -1,4 +1,4 @@
-package com.iot.learnssm.firstssm.controller.converter.validation;
+package cn.tekin.learnssm.firstssm.controller.converter.validation;
 
 /**
  * Created by brian on 2016/3/6.

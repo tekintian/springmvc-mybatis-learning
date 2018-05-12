@@ -38,7 +38,7 @@ mapper：
 
 ## 开发service
 
-在`com.iot.learnssm.firstssm.service.ItemsService`中添加两个接口
+在`cn.tekin.learnssm.firstssm.service.ItemsService`中添加两个接口
 
 ```java
   //根据id查询商品信息
@@ -65,7 +65,7 @@ mapper：
 
 ```
 
-在`com.iot.learnssm.firstssm.service.impl.ItemsServiceImpl`中实现接口，增加`itemsMapper`属性
+在`cn.tekin.learnssm.firstssm.service.impl.ItemsServiceImpl`中实现接口，增加`itemsMapper`属性
 
 
 ```java
@@ -295,4 +295,4 @@ response.getWriter().write("json串");
 
 ----
 
-> 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)
+[云南网](http://www.yunnan.ws/)
