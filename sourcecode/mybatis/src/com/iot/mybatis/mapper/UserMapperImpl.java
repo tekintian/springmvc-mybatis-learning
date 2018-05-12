@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by Brian on 2016/2/24.
  */
-public interface UserMapper {
+public interface UserMapperImpl {
     //根据id查询用户信息
     public User findUserById(int id) throws Exception;
 

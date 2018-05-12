@@ -6,7 +6,7 @@
  namespace 命名空间，作用就是对sql进行分类化管理,理解为sql隔离
  注意：使用mapper代理方法开发，namespace有特殊重要的作用
  -->
-<mapper namespace="cn.tekin.mybatis.mapper.UserMapper">
+<mapper namespace="cn.tekin.mybatis.mapper.UserMapperImpl">
 
     <!-- 开启本mapper的namespace下的二级缓存
     type：指定cache接口的实现类的类型，mybatis默认使用PerpetualCache
