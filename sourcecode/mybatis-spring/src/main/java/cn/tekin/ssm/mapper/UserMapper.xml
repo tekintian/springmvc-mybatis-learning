@@ -6,7 +6,7 @@
  namespace 命名空间，作用就是对sql进行分类化管理,理解为sql隔离
  注意：使用mapper代理方法开发，namespace有特殊重要的作用
  -->
-<mapper namespace="cn.tekin.ssm.mapper.UserMapper">
+<mapper namespace="UserMapper">
 
     <!-- 在映射文件中配置很多sql语句 -->
 

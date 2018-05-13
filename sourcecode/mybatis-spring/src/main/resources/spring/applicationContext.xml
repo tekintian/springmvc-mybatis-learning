@@ -42,7 +42,7 @@
 
     <!-- <bean id="userMapper" class="org.ssm.spring.mapper.MapperFactoryBean">
         //mapperInterface指定mapper接口
-        <property name="mapperInterface" value="cn.tekin.ssm.mapper.UserMapper"/>
+        <property name="mapperInterface" value="UserMapper"/>
         <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
     </bean>-->
 
