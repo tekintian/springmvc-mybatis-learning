@@ -5,16 +5,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-/**
- * Created by brian on 2016/2/19.
- */
-
+@RequestMapping("/items")
 //使用@Controller来标识它是一个控制器
 @Controller
 public class ItemsController3 {
+
 
     //商品查询列表
     @RequestMapping("/queryItems")
@@ -80,4 +77,24 @@ public class ItemsController3 {
     //
     //    return modelAndView;
     //}
+    @RequestMapping("/testItems")
+    public ModelAndView testItems() throws Exception{
+        List<Items> myitems=new ArrayList<Items>();
+        Items it1=new Items();
+        it1.setId(12);
+        it1.setName("tekin");
+        it1.setPrice(88.8f);
+        it1.setDetail("测试只用，items 详细描述");
+        it1.setPic("static/images/pic.jpg");
+        it1.setCreatetime(new Date());
+
+        myitems.add(it1);
+
+        ModelAndView modelAndView=new ModelAndView();
+        modelAndView.addObject("myitems",myitems);
+
+        modelAndView.setViewName("items/testItems");
+        return modelAndView;
+    }
+
 }

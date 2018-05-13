@@ -9,7 +9,7 @@
     <!-- 对于注解的Handler 可以单个配置
      实际开发中加你使用组件扫描
      -->
-    <!--  <bean  class="cn.tekin.ssm.controller.ItemsController3"/> -->
+    <!--  <bean  class="ItemsController3"/> -->
     <!-- 可以扫描controller、service、...
 	这里让扫描controller，指定controller的包
 	 -->
