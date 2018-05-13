@@ -3,7 +3,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 
     <!-- 配置Handler -->
-    <bean id="itemsController" name="/queryItems.action" class="cn.tekin.ssm.controller.ItemsController"/>
+    <bean id="itemsController" name="/item/queryItem.action" class="cn.tekin.ssm.controller.ItemsController"/>
     <!-- 配置另一个Handler -->
     <bean id="itemsController2" class="cn.tekin.ssm.controller.ItemsController2"/>
     <!-- 处理器映射器
@@ -20,6 +20,7 @@
                 <prop key="/queryItems1.action">itemsController</prop>
                 <prop key="/queryItems2.action">itemsController</prop>
                 <prop key="/queryItems3.action">itemsController2</prop>
+                <prop key="/item/editItem.action">itemsController2</prop>
             </props>
         </property>
     </bean>

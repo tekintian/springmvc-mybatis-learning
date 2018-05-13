@@ -515,6 +515,30 @@
 	},
 	"buffers":
 	[
+		{
+			"contents": "# mybatis学习笔记(5)-配置文件\n\n标签： mybatis\n\n---\n\n**Contents**\n\n  - [properties(属性)](#properties属性)\n  - [settings(全局参数配置)](#settings全局参数配置)\n  - [typeAliases(类型别名)](#typealiases类型别名)\n  - [typeHandlers(类型处理器)](#typehandlers类型处理器)\n  - [mappers(映射配置)](#mappers映射配置)\n\n\n\n---\n\n本文主要讲解SqlMapConfig配置文件\n\n> 参考[mybatis – MyBatis 3 `|` Configuration](http://www.mybatis.org/mybatis-3/configuration.html)\n\nSqlMapConfig.xml中配置的内容和顺序如下\n\n- properties（属性）\n- settings（全局配置参数）\n- **typeAliases（类型别名）**\n- typeHandlers（类型处理器）\n- *objectFactory（对象工厂）*\n- *plugins（插件）*\n- environments（环境集合属性对象）\n  - environment（环境子属性对象）\n     - transactionManager（事务管理）\n     - dataSource（数据源）\n- **mappers（映射器）**\n\n\n(注：粗体是重点，斜体不常用)\n\n\n## properties(属性)\n\n将数据库连接参数单独配置在db.properties中，只需要在SqlMapConfig.xml中加载db.properties的属性值。在SqlMapConfig.xml中就不需要对数据库连接参数硬编码。\n\n将数据库连接参数只配置在db.properties中。原因：方便对参数进行统一管理，其它xml可以引用该db.properties。\n\n```\njdbc.driver=com.mysql.jdbc.Driver\njdbc.url=jdbc:mysql://192.168.1.8:3306/mybatis_demo?characterEncoding=utf-8&amp;useSSL=false\njdbc.username=root\njdbc.password=123\n```\n\n在sqlMapConfig.xml加载属性文件：\n\n```xml\n<properties resource=\"db.properties\">\n        <!--properties中还可以配置一些属性名和属性值  -->\n        <!-- <property name=\"jdbc.driver\" value=\"\"/> -->\n</properties>\n\n<!-- 和spring整合后 environments配置将废除-->\n<environments default=\"development\">\n    <environment id=\"development\">\n        <!-- 使用jdbc事务管理，事务控制由mybatis-->\n        <transactionManager type=\"JDBC\" />\n        <!-- 数据库连接池,由mybatis管理-->\n        <dataSource type=\"POOLED\">\n            <property name=\"driver\" value=\"${jdbc.driver}\" />\n            <property name=\"url\" value=\"${jdbc.url}\" />\n            <property name=\"username\" value=\"${jdbc.username}\" />\n            <property name=\"password\" value=\"${jdbc.password}\" />\n        </dataSource>\n    </environment>\n</environments>\n```\n\n注意： MyBatis 将按照下面的顺序(优先级)来加载属性：\n\n- 在`properties`元素体内定义的属性首先被读取。 \n- 然后会读取`properties`元素中resource或url加载的属性，它会覆盖已读取的同名属性。 \n- 最后读取`parameterType`传递的属性，它会覆盖已读取的同名属性。\n\n建议：\n\n- 不要在`properties`元素体内添加任何属性值，只将属性值定义在properties文件中。\n- 在properties文件中定义属性名要有一定的特殊性，如：XXXXX.XXXXX.XXXX\n\n## settings(全局参数配置)\n\nmybatis框架在运行时可以调整一些运行参数,比如：开启二级缓存、开启延迟加载...\n\n全局参数将会影响mybatis的运行行为。具体参考官网：\n\n> [mybatis-settings](http://www.mybatis.org/mybatis-3/configuration.html#settings)\n\n\n## typeAliases(类型别名)\n\n在mapper.xml中，定义很多的statement，statement需要`parameterType`指定输入参数的类型、需要`resultType`指定输出结果的映射类型。\n\n如果在指定类型时输入类型全路径，不方便进行开发，可以针对`parameterType`或`resultType`指定的类型定义一些别名，在mapper.xml中通过别名定义，方便开发。\n\n\n- mybatis默认支持别名\n\n> 参考 [typeAliases](http://www.mybatis.org/mybatis-3/configuration.html#typeAliases)\n\n\n|  别名  |  映射的类型  |\n|:---    |  :----     |\n|_byte   | \tbyte | \n|_long \t |  long | \n|_short  |\tshort| \n|_int| \tint| \n|_integer| \tint| \n|_double| \tdouble|\n|_float| \tfloat |\n|_boolean| \tboolean|\n|string |\tString |\n|byte |\tByte |\n|long |\tLong| \n|short |\tShort |\n|int |\tInteger |\n|integer |\tInteger |\n|double |\tDouble |\n|float |\tFloat |\n|boolean| \tBoolean |\n|date |\tDate |\n|decimal |\tBigDecimal |\n|bigdecimal| BigDecimal| \n\n\n- 自定义别名\n  -\t单个别名定义 \n  -\t批量定义别名（常用）\n\n```xml\n<!-- 别名定义 -->\n<typeAliases>\n\n    <!-- 针对单个别名定义\n    type：类型的路径\n    alias：别名\n     -->\n    <!-- <typeAlias type=\"cn.itcast.mybatis.po.User\" alias=\"user\"/> -->\n    <!-- 批量别名定义\n    指定包名，mybatis自动扫描包中的po类，自动定义别名，别名就是类名（首字母大写或小写都可以）\n    -->\n    <package name=\"cn.tekin.mybatis.po\"/>\n\n</typeAliases>\n```\n\n## typeHandlers(类型处理器)\n\nmybatis中通过typeHandlers完成jdbc类型和java类型的转换。例如：\n\n```xml\n<select id=\"findUserById\" parameterType=\"int\" resultType=\"user\">\n\t\tselect * from user where id = #{id}\n</select>\n```\n\nmybatis自带的类型处理器基本上满足日常需求，不需要单独定义。\n\nmybatis支持类型处理器\n\n>  参考 [typeHandlers](http://www.mybatis.org/mybatis-3/configuration.html#typeHandlers)\n\n|类型处理器\t|Java类型|\tJDBC类型|\n|:---|:---|:----|\n|BooleanTypeHandler | Boolean，boolean |任何兼容的布尔值|\n|ByteTypeHandler |\tByte，byte |\t任何兼容的数字或字节类型|\n|ShortTypeHandler |\tShort，short |\t任何兼容的数字或短整型|\n|IntegerTypeHandler| \tInteger，int |\t任何兼容的数字和整型|\n|LongTypeHandler |\tLong，long \t|任何兼容的数字或长整型|\n|FloatTypeHandler |\tFloat，float |\t任何兼容的数字或单精度浮点型|\n|DoubleTypeHandler |\tDouble，double |\t任何兼容的数字或双精度浮点型|\n|BigDecimalTypeHandler |\tBigDecimal |\t任何兼容的数字或十进制小数类型|\n|StringTypeHandler |\tString |\tCHAR和VARCHAR类型|\n|ClobTypeHandler |\tString |\tCLOB和LONGVARCHAR类型|\n|NStringTypeHandler| \tString |\tNVARCHAR和NCHAR类型|\n|NClobTypeHandler \t|String |\tNCLOB类型\n|ByteArrayTypeHandler| \tbyte[] |\t任何兼容的字节流类型|\n|BlobTypeHandler |\tbyte[] |\tBLOB和LONGVARBINARY类型|\n|DateTypeHandler |\tDate（java.util）|\tTIMESTAMP类型|\n|DateOnlyTypeHandler |\tDate（java.util）|\tDATE类型|\n|TimeOnlyTypeHandler |\tDate（java.util）|\tTIME类型|\n|SqlTimestampTypeHandler |\tTimestamp（java.sql）|\tTIMESTAMP类型|\n|SqlDateTypeHandler |\tDate（java.sql）|\tDATE类型|\n|SqlTimeTypeHandler |\tTime（java.sql）|\tTIME类型|\n|ObjectTypeHandler| \t任意|\t其他或未指定类型|\n|EnumTypeHandler |\tEnumeration类型|\tVARCHAR-任何兼容的字符串类型，作为代码存储（而不是索引）|\n\n\n\n## mappers(映射配置)\n\n- 通过resource加载单个映射文件\n\n```xml\n<!--通过resource方法一次加载一个映射文件 -->\n<mapper resource=\"mapper/UserMapper.xml\"/>\n```\n\n- 通过mapper接口加载单个mapper\n\n```xml\n <!-- 通过mapper接口加载单个 映射文件\n        遵循一些规范：需要将mapper接口类名和mapper.xml映射文件名称保持一致，且在一个目录中\n        上边规范的前提是：使用的是mapper代理方法\n         -->\n<mapper class=\"cn.tekin.mybatis.mapper.UserMapper\"/> \n```\n\n目录示例\n\n```\ncn.tekin.mybatis.mapper------------------package包\n           |----UserMapper.java\n           |----UserMapper.xml\n              \n```\n\n- 批量加载mapper(推荐使用)\n\n```xml\n<!-- 批量加载mapper\n\t\t指定mapper接口的包名，mybatis自动扫描包下边所有mapper接口进行加载\n\t\t遵循一些规范：需要将mapper接口类名和mapper.xml映射文件名称保持一致，且在一个目录 中\n\t\t上边规范的前提是：使用的是mapper代理方法\n\t\t -->\n<package name=\"cn.tekin.mybatis.mapper\"/>\n```\n\n\n\n----\n\n> [云南网](http://www.yunnan.ws/) \n\n> 来源：[brianway](http://brianway.github.io/)\n\n",
+			"file": "mybatis/mybatis学习笔记(5)-配置文件.md",
+			"file_size": 8183,
+			"file_write_time": 131705988567650155,
+			"settings":
+			{
+				"buffer_size": 5565,
+				"encoding": "UTF-8 with BOM",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "# mybatis学习笔记(6)-输入映射\n\n标签： mybatis\n\n---\n\n**Contents**\n\n  - [传递pojo的包装对象](#传递pojo的包装对象)\n    - [Error querying database.  Cause: org.apache.ibatis.reflection.ReflectionException: There is no getter for property named 'UserCustom' in 'class cn.tekin.mybatis.po.UserQueryVo'](#error-querying-database--cause-orgapacheibatisreflectionreflectionexception-there-is-no-getter-for-property-named-usercustom-in-class-comiotmybatispouserqueryvo)\n    - [Cause: org.apache.ibatis.reflection.ReflectionException: There is no getter for property named 'UserCustom' in 'class cn.tekin.mybatis.po.UserQueryVo'](#cause-orgapacheibatisreflectionreflectionexception-there-is-no-getter-for-property-named-usercustom-in-class-comiotmybatispouserqueryvo)\n\n\n\n---\n\n本文主要讲解mybatis的输入映射。\n\n\n通过parameterType指定输入参数的类型，类型可以是\n\n- 简单类型\n- hashmap\n- pojo的包装类型\n\n## 传递pojo的包装对象\n\n- 定义包装类型pojo\n\n```java\npackage cn.tekin.mybatis.po;\n\n/**\n * Created by Brian on 2016/2/24.\n */\npublic class UserQueryVo {\n\n    //在这里包装所需要的查询条件\n\n    //用户查询条件\n    private UserCustom userCustom;\n\n    public UserCustom getUserCustom() {\n        return userCustom;\n    }\n\n    public void setUserCustom(UserCustom userCustom) {\n        this.userCustom = userCustom;\n    }\n\n    //可以包装其它的查询条件，订单、商品\n    //....\n\n}\n```\n\n其中，UserCustom类继承User\n\n```java\npublic class UserCustom extends User{\n}\n```\n\n- mapper.xml\n\n在UserMapper.xml中定义用户信息综合查询（查询条件复杂，通过高级查询进行复杂关联查询）。\n\n```xml\n    <!-- 用户信息综合查询\n        #{userCustom.sex}:取出pojo包装对象中性别值\n        ${userCustom.username}：取出pojo包装对象中用户名称\n     -->\n    <select id=\"findUserList\" parameterType=\"cn.tekin.mybatis.po.UserQueryVo\"\n            resultType=\"cn.tekin.mybatis.po.UserCustom\">\n        SELECT * FROM user WHERE user.sex=#{userCustom.sex} AND user.username LIKE '%${userCustom.username}%'\n    </select>\n```\n\n注意不要将`#{userCustom.sex}`中的`userCustom`写成`UserCustom`,前者指属性名(由于使用IDE提示自动补全，所以只是把类型名首字母小写了)，后者指类型名，这里是`UserQueryVo`类中的`userCustom`属性，是**属性名**。写错会报如下异常：\n\n```\norg.apache.ibatis.exceptions.PersistenceException: \n### Error querying database.  Cause: org.apache.ibatis.reflection.ReflectionException: There is no getter for property named 'UserCustom' in 'class cn.tekin.mybatis.po.UserQueryVo'\n### Cause: org.apache.ibatis.reflection.ReflectionException: There is no getter for property named 'UserCustom' in 'class cn.tekin.mybatis.po.UserQueryVo'\n```\n\n- mapper.java\n\n```java\n//用户信息综合查询\npublic List<UserCustom> findUserList(UserQueryVo userQueryVo) throws Exception;\n```\n\n- 完整代码查看\n\n\n\n\n----\n\n> [云南网](http://www.yunnan.ws/) \n\n> 来源：[brianway](http://brianway.github.io/)\n\n\n\n\n",
+			"file": "mybatis/mybatis学习笔记(6)-输入映射.md",
+			"file_size": 4069,
+			"file_write_time": 131705986595754070,
+			"settings":
+			{
+				"buffer_size": 2543,
+				"encoding": "UTF-8 with BOM",
+				"line_ending": "Windows"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -589,138 +613,140 @@
 	},
 	"expanded_folders":
 	[
-		"/E/JAVA/springmvc-mybatis-learning"
+		"/E/JAVA/springmvc-mybatis-learning",
+		"/E/JAVA/springmvc-mybatis-learning/mybatis",
+		"/E/JAVA/springmvc-mybatis-learning/springmvc"
 	],
 	"file_history":
 	[
-		"/E/MyWork/bjyixiu.com/yck/yck-web/README.md",
-		"/E/JAVA/mybatis1/user.sql",
-		"/E/JAVA/springmvc-mybatis-learning/README.md",
-		"/E/JAVA/mybatis1/mybatis_demo.sql",
-		"/D/Android/Src/mfxs_v11.868_ok/res/values-zh-rCN/strings.xml",
-		"/D/Android/Src/mfxs_v11.868_ok/res/values/strings.xml",
-		"/D/Android/Src/mfxs_v11.868_ok/apktool.yml",
-		"/E/Tekin/Desktop/t.html",
-		"/D/Android/Src/mfxs_v11.868_ok/AndroidManifest.xml",
-		"/D/Android/Src/mfxs_v11.868/res/drawable/splash_bg.xml",
-		"/D/Android/Src/mfxs_v11.868/AndroidManifest.xml",
-		"/D/Android/Src/mfxs_v11.868/res/layout/splash.xml",
-		"/D/Android/Src/mfxs_v99.99.01/res/layout/activity_setting.xml",
-		"/D/Android/Src/mfxs_v99.99.01/res/layout/mhd_download_progress.xml",
-		"/D/Android/Src/mfxs_v99.99.01/res/layout/list_item_ugc_book.xml",
-		"/D/Android/Src/mfxs_v99.99.01/AndroidManifest.xml",
-		"/D/Android/Src/mfxs_v99.99.01/apktool.yml",
-		"/D/Android/Src/mfxs_v99.99.01/smali/com/umeng/update/m.smali",
-		"/D/Android/Src/mfxs_v99.99.01/res/values/strings.xml",
-		"/D/Android/Src/mfxs_v99.99.01/smali/android/support/v4/app/NotificationManagerCompat$SideChannelManager.smali",
-		"/D/Android/Src/mfxs_v99.99.01/smali/com/mfxs/kankan/MyApplication.smali",
-		"/D/Android/Src/mfxs_v99.99.01/smali/com/umeng/update/n.smali",
-		"/D/Android/Src/mfxs_v99.99.01/smali/com/umeng/update/net/a.smali",
-		"/D/Android/Src/mfxs_v99.99.01/smali/com/umeng/update/UpdateResponse.smali",
-		"/D/Android/Src/mfxs_v99.99.01/smali/cn/kuwo/tingshu/opensdk/http/b.smali",
-		"/D/Android/Src/mfxs_v99.99.01/smali/cn/sharesdk/framework/statistics/c.smali",
-		"/D/Android/Src/mfxs_v99.99.01/smali/cn/sharesdk/tencent/qq/n.smali",
-		"/D/Android/Src/mfxs_v99.99.01/smali/cn/sharesdk/tencent/qzone/f.smali",
-		"/D/Android/Src/mfxs_v99.99.01/smali/com/mfxs/kankan/event/DownloadCompleteReceiver.smali",
-		"/D/Android/Src/mfxs_v99.99.01/smali/com/mfxs/kankan/ui/AudiobookCategoryActivity.smali",
-		"/D/Android/Src/mfxs_v99.99.01/smali/com/mfxs/kankan/ui/dl.smali",
-		"/D/Android/Src/mfxs_v99.99.01/smali/com/mfxs/kankan/ui/do.smali",
-		"/D/Android/Src/mfxs_v99.99.01/smali/com/mfxs/kankan/ui/SettingsActivity.smali",
-		"/D/Android/Src/mfxs_v99.99.01/smali/com/umeng/a/i.smali",
-		"/D/Android/Src/mfxs_v99.99.01/smali/com/zxinsight/analytics/a/a.smali",
-		"/D/Android/Src/mfxs_v99.99.01/smali/com/xiaomi/push/service/ad.smali",
-		"/D/Android/Src/mfxs_v99.99.01/smali/cn/sharesdk/sina/weibo/f.smali",
-		"/D/Android/Src/mfxs_v99.99.01/res/values/public.xml",
-		"/E/Tekin/Desktop/showtime.jsp",
-		"/E/JAVA/servlet_user_manage/src/main/webapp/date.html",
-		"/E/JAVA/jsp_demo/docs/SimpleDateFormat使用详解.md",
-		"/E/JAVA/jsp_demo/docs/JSP九大内置对象及四个作用域详解.md",
-		"/E/JAVA/jsp_demo/README.md",
-		"/E/JAVA/servlet_user_manage/JAVA学习笔记.md",
-		"/E/JAVA/jquery-sdpagination.js/README.md",
-		"/E/JAVA/servlet_user_manage/README.md",
-		"/C/Users/Tekin/.IntelliJIdea2018.1/system/tomcat/Unnamed_jsp_demo/work/Catalina/localhost/jsp_demo/org/apache/jsp/tekinjspdemo999_jsp.java",
-		"/E/JAVA/jsp_demo/JSP九大内置对象详解.md",
-		"/E/Bitbucket/python/demo_indentation.py",
-		"/C/Users/Tekin/AppData/Local/Temp/flow/flowlib_397ea122/dom.js",
-		"/E/JAVA/servlet_user_manage/笔记",
-		"/E/JAVA/servlet_user_manage/src/main/webapp/timeout.html",
-		"/E/JAVA/java10_demo1/src/cn/tekin/java10/demo1/UploadTest.java",
-		"/E/Bitbucket/tools/ngok.sh",
-		"/E/JAVA/java10_demo1/README.md",
-		"/E/Bitbucket/weixin/wechat_shop/server_api/App/Admin/Controller/FocusController.class.php",
-		"/E/Bitbucket/weixin/wechat_shop/server_api/App/Admin/Controller/LoginController.class.php",
-		"/E/Bitbucket/weixin/wechat_shop/server_api/App/Admin/Controller/PublicController.class.php",
-		"/E/Bitbucket/weixin/wechat_shop/server_api/App/Admin/View/Shangchang/add.html",
-		"/E/Bitbucket/weixin/wechat_shop/server_api/App/Api/Controller/LoginController.class.php",
-		"/E/Bitbucket/weixin/wechat_shop/server_api/App/Admin/Controller/MoreController.class.php",
-		"/E/Bitbucket/weixin/wechat_shop/server_api/App/Admin/View/Sccat/index.html",
-		"/E/Bitbucket/weixin/wechat_shop/server_api/App/Admin/View/Sccat/add.html",
-		"/E/Bitbucket/weixin/wechat_shop/server_api/App/Admin/View/Shangchang/password.html",
-		"/E/Bitbucket/weixin/wechat_shop/server_api/App/Admin/View/Shangchang/nav.html",
-		"/E/Bitbucket/weixin/wechat_shop/server_api/App/Admin/View/Shangchang/index.html",
-		"/E/Bitbucket/weixin/wechat_shop/server_api/App/Admin/View/Upload/images_add.html",
-		"/E/Bitbucket/weixin/wechat_shop/server_api/App/Admin/View/Upload/img.html",
-		"/E/Bitbucket/weixin/wechat_shop/server_api/App/Admin/View/Upload/photo_add.html",
-		"/E/Bitbucket/weixin/wechat_shop/server_api/App/Admin/View/Voucher/add.html",
-		"/E/Bitbucket/weixin/wechat_shop/server_api/App/Admin/View/Voucher/get_pro.html",
-		"/E/Bitbucket/weixin/wechat_shop/server_api/App/Api/Controller/IndexController.class.php",
-		"/E/Bitbucket/weixin/wechat_shop/server_api/App/Api/Conf/functions.php",
-		"/E/Bitbucket/weixin/wechat_shop/server_api/App/Api/Conf/config.php",
-		"/E/Bitbucket/weixin/wechat_shop/server_api/App/Api/Model/NewsModel.class.php",
-		"/E/Bitbucket/weixin/wechat_shop/server_api/App/Api/Controller/CourseController.class.php",
-		"/E/Bitbucket/weixin/wechat_shop/wxss_src/app.js",
-		"/E/Bitbucket/weixin/wechat_shop/wxss_src/pages/address/address.js",
-		"/E/Bitbucket/weixin/wechat_shop/wxss_src/pages/address/user-address/user-address.js",
-		"/E/Bitbucket/weixin/wechat_shop/wxss_src/pages/cart/cart.js",
-		"/E/Bitbucket/weixin/wechat_shop/wxss_src/pages/category/index.js",
-		"/E/Bitbucket/weixin/wechat_shop/wxss_src/pages/crouse/detail.js",
-		"/E/Bitbucket/weixin/wechat_shop/wxss_src/pages/index/index.js",
-		"/E/Bitbucket/weixin/wechat_shop/wxss_src/pages/listdetail/listdetail.js",
-		"/E/Bitbucket/weixin/wechat_shop/wxss_src/pages/order/detail.js",
-		"/E/Bitbucket/weixin/wechat_shop/wxss_src/pages/order/pay.js",
-		"/E/Bitbucket/weixin/wechat_shop/wxss_src/pages/product/detail.js",
-		"/E/Bitbucket/weixin/wechat_shop/wxss_src/pages/ritual/ritual.js",
-		"/E/Bitbucket/weixin/wechat_shop/wxss_src/pages/rituall/rituall.js",
-		"/E/Bitbucket/weixin/wechat_shop/wxss_src/pages/search/search.js",
-		"/E/Bitbucket/weixin/wechat_shop/wxss_src/pages/shop_store/shop_store.js",
-		"/E/Bitbucket/weixin/wechat_shop/wxss_src/pages/user/dingdan.js",
-		"/E/Bitbucket/weixin/wechat_shop/wxss_src/pages/user/tuihuo.js",
-		"/E/Bitbucket/weixin/wechat_shop/wxss_src/pages/user/user.js",
-		"/E/Bitbucket/weixin/wechat_shop/server_api/App/Runtime/Cache/Admin/9df924d9a2d217daa77a359c5bee0c33.php",
-		"/E/Bitbucket/weixin/wechat_shop/server_api/App/Admin/View/Page/adminusermenu.html",
-		"/E/Bitbucket/weixin/wechat_shop/server_api/App/Admin/View/More/index.html",
-		"/E/Bitbucket/weixin/wechat_shop/server_api/App/Runtime/Logs/Admin/18_04_22.log",
-		"/E/Bitbucket/weixin/wechat_shop/wechat_shop.sql",
-		"/E/Bitbucket/shop/ECShop_v3.6.0_UTF8/wxapp/weeshop/README.md",
-		"/E/Bitbucket/shop/ECShop_v3.6.0_UTF8/wxapp/ecshop-h5-nodejs/README.md",
-		"/E/Bitbucket/shop/ECShop_v3.6.0_UTF8/wxapp/ecshop-wechat-app/README.md",
-		"/E/Bitbucket/shop/ECShop_v3.6.0_UTF8/wxapp/eweapp/README.md",
-		"/E/Bitbucket/myweb/yunnan.ws/db.php",
-		"/E/Bitbucket/weixin/ssl/yunnan.ws.conf",
-		"/E/Bitbucket/myweb/yunnan.ws/yunnan.ws.conf",
-		"/E/Bitbucket/weixin/wechat_shop/README.md",
-		"/E/Bitbucket/weixin/ssl/yunnan.ws.pem",
-		"/E/Bitbucket/weixin/wechat_shop/server_api/App/Common/Common/function.php",
-		"/E/Bitbucket/weixin/san.cnf",
-		"/E/Bitbucket/weixin/wechat_shop/server_api/pack.php",
-		"/E/Bitbucket/weixin/wechat_shop/server_api/gg.php",
-		"/E/Bitbucket/weixin/wechat_shop/server_api/App/Admin/View/Login/index.html",
-		"/E/Bitbucket/weixin/wechat_shop/server_api/App/Admin/View/Inout/index.html",
-		"/E/Bitbucket/weixin/wechat_shop/server_api/App/Admin/Controller/IndexController.class.php",
-		"/E/Bitbucket/weixin/wechat_shop/server_api/App/Admin/View/Index/index.html",
-		"/E/Bitbucket/weixin/wechat_shop/server_api/pass_encrypt.php",
-		"/E/Bitbucket/weixin/wechat_shop/server_api/App/Admin/Controller/AdminuserController.class.php",
-		"/E/Bitbucket/weixin/wechat_shop/server_api/App/Admin/Controller/ShangchangController.class.php",
-		"/E/Bitbucket/weixin/wechat_shop/server_api/App/Api/Controller/UserController.class.php",
-		"/E/Bitbucket/weixin/wechat_shop/server_api/teste.bin",
-		"/E/Bitbucket/weixin/wechat_shop/server_api/App/Common/Common/print.php",
-		"/E/Bitbucket/weixin/wechat_shop/server_api/App/Common/Common/functions.php",
-		"/E/Bitbucket/weixin/wechat_shop/server_api/App/Conf/function.php",
-		"/E/Bitbucket/weixin/wechat_shop/server_api/ThinkPHP/Common/functions.php",
-		"/E/Bitbucket/weixin/wechat_shop/server_api/App/Common/Conf/config.php",
-		"/E/Bitbucket/weixin/wechat_shop/server_api/App/Common/Conf/db.php",
-		"/E/Bitbucket/weixin/wechat_shop/server_api/App/Common/Conf/debug.php"
+		"/E/JAVA/springmvc-mybatis-learning/mybatis/mybatis学习笔记(1)-对原生jdbc程序中的问题总结.md",
+		"/E/JAVA/springmvc-mybatis-learning/mybatis/mybatis学习笔记(4)-开发dao方法.md",
+		"/E/JAVA/springmvc-mybatis-learning/springmvc/springmvc学习笔记(12)-springmvc注解开发之包装类型参数绑定.md",
+		"/E/JAVA/springmvc-mybatis-learning/mybatis/mybatis学习笔记(10)-一对一查询.md",
+		"/E/JAVA/springmvc-mybatis-learning/mybatis/mybatis学习笔记(11)-一对多查询.md",
+		"/E/JAVA/springmvc-mybatis-learning/mybatis/mybatis学习笔记(12)-多对多查询.md",
+		"/E/JAVA/springmvc-mybatis-learning/mybatis/mybatis学习笔记(13)-延迟加载.md",
+		"/E/JAVA/springmvc-mybatis-learning/mybatis/mybatis学习笔记(15)-查询缓存之二级缓存.md",
+		"/E/JAVA/springmvc-mybatis-learning/mybatis/mybatis学习笔记(17)-spring和mybatis整合.md",
+		"/E/JAVA/springmvc-mybatis-learning/mybatis/mybatis学习笔记(18)-mybatis逆向工程.md",
+		"/E/JAVA/springmvc-mybatis-learning/mybatis/mybatis学习笔记(3)-入门程序一.md",
+		"/E/JAVA/springmvc-mybatis-learning/mybatis/mybatis学习笔记(3)-入门程序二.md",
+		"/E/JAVA/springmvc-mybatis-learning/mybatis/mybatis学习笔记(5)-配置文件.md",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/learnssm-firstssm/src/main/resources/db.properties",
+		"/E/JAVA/springmvc-mybatis-learning/mybatis/mybatis学习笔记(6)-输入映射.md",
+		"/E/JAVA/springmvc-mybatis-learning/mybatis/mybatis学习笔记(7)-输出映射.md",
+		"/E/JAVA/springmvc-mybatis-learning/mybatis/mybatis学习笔记(8)-动态sql.md",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/learnssm-firstssm/pom.xml",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/learnssm-firstssm/src/main/java/com/iot/learnssm/firstssm/controller/converter/CustomDateConverter.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/learnssm-firstssm/src/main/java/com/iot/learnssm/firstssm/controller/converter/validation/ValidGroup1.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/learnssm-firstssm/src/main/java/com/iot/learnssm/firstssm/controller/converter/validation/ValidGroup2.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/learnssm-firstssm/src/main/java/com/iot/learnssm/firstssm/controller/ItemsController.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/learnssm-firstssm/src/main/java/com/iot/learnssm/firstssm/controller/JsonTest.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/learnssm-firstssm/src/main/java/com/iot/learnssm/firstssm/controller/LoginController.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/learnssm-firstssm/src/main/java/com/iot/learnssm/firstssm/controller/MyJsonTest.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/learnssm-firstssm/src/main/java/com/iot/learnssm/firstssm/exception/CustomException.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/learnssm-firstssm/src/main/java/com/iot/learnssm/firstssm/exception/CustomExceptionResolver.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/learnssm-firstssm/src/main/java/com/iot/learnssm/firstssm/interceptor/HandlerInterceptor1.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/learnssm-firstssm/src/main/java/com/iot/learnssm/firstssm/interceptor/HandlerInterceptor2.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/learnssm-firstssm/src/main/java/com/iot/learnssm/firstssm/interceptor/LoginInterceptor.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/learnssm-firstssm/src/main/java/com/iot/learnssm/firstssm/mapper/ItemsMapper.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/learnssm-firstssm/src/main/java/com/iot/learnssm/firstssm/mapper/ItemsMapperCustom.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/learnssm-firstssm/src/main/java/com/iot/learnssm/firstssm/mapper/OrderdetailMapper.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/learnssm-firstssm/src/main/java/com/iot/learnssm/firstssm/mapper/OrdersMapper.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/learnssm-firstssm/src/main/java/com/iot/learnssm/firstssm/mapper/UserMapper.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/learnssm-firstssm/src/main/java/com/iot/learnssm/firstssm/po/Items.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/learnssm-firstssm/src/main/java/com/iot/learnssm/firstssm/po/ItemsCustom.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/learnssm-firstssm/src/main/java/com/iot/learnssm/firstssm/po/ItemsExample.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/learnssm-firstssm/src/main/java/com/iot/learnssm/firstssm/po/ItemsQueryVo.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/learnssm-firstssm/src/main/java/com/iot/learnssm/firstssm/po/Orderdetail.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/learnssm-firstssm/src/main/java/com/iot/learnssm/firstssm/po/OrderdetailExample.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/learnssm-firstssm/src/main/java/com/iot/learnssm/firstssm/po/Orders.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/learnssm-firstssm/src/main/java/com/iot/learnssm/firstssm/po/OrdersExample.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/learnssm-firstssm/src/main/java/com/iot/learnssm/firstssm/po/User.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/learnssm-firstssm/src/main/java/com/iot/learnssm/firstssm/po/UserExample.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/learnssm-firstssm/src/main/java/com/iot/learnssm/firstssm/service/impl/ItemsServiceImpl.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/learnssm-firstssm/src/main/java/com/iot/learnssm/firstssm/service/ItemsService.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/learnssm-firstssm/src/main/resources/com/iot/learnssm/firstssm/mapper/ItemsMapper.xml",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/learnssm-firstssm/src/main/resources/com/iot/learnssm/firstssm/mapper/ItemsMapperCustom.xml",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/learnssm-firstssm/src/main/resources/com/iot/learnssm/firstssm/mapper/OrderdetailMapper.xml",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/learnssm-firstssm/src/main/resources/com/iot/learnssm/firstssm/mapper/OrdersMapper.xml",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/learnssm-firstssm/src/main/resources/com/iot/learnssm/firstssm/mapper/UserMapper.xml",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/learnssm-firstssm/src/main/resources/mybatis/sqlMapConfig.xml",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/learnssm-firstssm/src/main/resources/spring/applicationContext-dao.xml",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/learnssm-firstssm/src/main/resources/spring/applicationContext-service.xml",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/learnssm-firstssm/src/main/resources/spring/applicationContext-transaction.xml",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/learnssm-firstssm/src/main/resources/spring/springmvc.xml",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/mybatis-generator/generatorConfig.xml",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/mybatis-spring/config/db.properties",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/mybatis/config/db.properties",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/mybatis-spring/config/mybatis/SqlMapConfig.xml",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/mybatis-spring/config/spring/applicationContext.xml",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/mybatis-spring/config/sqlmap/User.xml",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/mybatis-spring/src/com/iot/ssm/dao/UserDao.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/mybatis-spring/src/com/iot/ssm/dao/UserDaoImpl.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/mybatis-spring/src/com/iot/ssm/mapper/ItemsMapper.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/mybatis-spring/src/com/iot/ssm/mapper/ItemsMapper.xml",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/mybatis-spring/src/com/iot/ssm/mapper/UserMapper.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/mybatis-spring/src/com/iot/ssm/mapper/UserMapper.xml",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/mybatis-spring/src/com/iot/ssm/po/Items.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/mybatis-spring/src/com/iot/ssm/po/ItemsExample.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/mybatis-spring/src/com/iot/ssm/po/User.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/mybatis-spring/test/com/iot/ssm/dao/UserDaoImplTest.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/mybatis-spring/test/com/iot/ssm/mapper/ItemsMapperTest.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/mybatis-spring/test/com/iot/ssm/mapper/UserMapperTest.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/mybatis/config/mapper/UserMapper.xml",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/mybatis/config/sqlmap/User.xml",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/mybatis/config/SqlMapConfig.xml",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/mybatis/src/com/iot/mybatis/dao/UserDao.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/mybatis/src/com/iot/mybatis/dao/UserDaoImpl.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/mybatis/src/com/iot/mybatis/first/MybatisFirst.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/mybatis/src/com/iot/mybatis/jdbc/JdbcTest.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/mybatis/src/com/iot/mybatis/mapper/OrdersMapperCustom.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/mybatis/src/com/iot/mybatis/mapper/OrdersMapperCustom.xml",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/mybatis/src/com/iot/mybatis/mapper/UserMapper.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/mybatis/src/com/iot/mybatis/mapper/UserMapper.xml",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/mybatis/src/com/iot/mybatis/po/Items.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/mybatis/src/com/iot/mybatis/po/Orderdetail.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/mybatis/src/com/iot/mybatis/po/Orders.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/mybatis/src/com/iot/mybatis/po/OrdersCustom.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/mybatis/src/com/iot/mybatis/po/User.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/mybatis/src/com/iot/mybatis/po/UserCustom.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/mybatis/src/com/iot/mybatis/po/UserQueryVo.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/mybatis/test/com/iot/mybatis/dao/UserDaoImplTest.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/mybatis/test/com/iot/mybatis/mapper/OrdersMapperCustomTest.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/mybatis/test/com/iot/mybatis/mapper/UserMapperTest.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/springmvcfirst/src/main/java/com/iot/ssm/controller/ItemsController.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/springmvcfirst/src/main/java/com/iot/ssm/controller/ItemsController2.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/springmvcfirst/src/main/java/com/iot/ssm/po/Items.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/springmvcfirst/src/main/java/com/iot/ssm/po/Orderdetail.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/springmvcfirst/src/main/java/com/iot/ssm/po/Orders.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/springmvcfirst/src/main/java/com/iot/ssm/po/User.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/springmvcfirst/src/main/resources/springmvc.xml",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/springmvcsecond/src/main/java/com/iot/ssm/controller/ItemsController.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/springmvcsecond/src/main/java/com/iot/ssm/controller/ItemsController3.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/springmvcsecond/src/main/java/com/iot/ssm/po/Items.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/springmvcsecond/src/main/java/com/iot/ssm/po/Orderdetail.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/springmvcsecond/src/main/java/com/iot/ssm/po/Orders.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/springmvcsecond/src/main/java/com/iot/ssm/po/User.java",
+		"/E/JAVA/springmvc-mybatis-learning/sourcecode/springmvcsecond/src/main/resources/springmvc.xml",
+		"/E/JAVA/springmvc-mybatis-learning/springmvc/springmvc学习笔记(1)-框架原理和入门配置.md",
+		"/E/JAVA/springmvc-mybatis-learning/springmvc/springmvc学习笔记(10)-springmvc注解开发之商品修改功能.md",
+		"/E/JAVA/springmvc-mybatis-learning/springmvc/springmvc学习笔记(11)-springmvc注解开发之简单参数绑定.md",
+		"/E/JAVA/springmvc-mybatis-learning/springmvc/springmvc学习笔记(13)-springmvc注解开发之集合类型参数绑定.md",
+		"/E/JAVA/springmvc-mybatis-learning/springmvc/springmvc学习笔记(14)-springmvc校验.md",
+		"/E/JAVA/springmvc-mybatis-learning/springmvc/springmvc学习笔记(15)-数据回显.md",
+		"/E/JAVA/springmvc-mybatis-learning/springmvc/springmvc学习笔记(16)-异常处理器.md",
+		"/E/JAVA/springmvc-mybatis-learning/springmvc/springmvc学习笔记(17)-上传图片.md",
+		"/E/JAVA/springmvc-mybatis-learning/springmvc/springmvc学习笔记(18)-json数据交互.md",
+		"/E/JAVA/springmvc-mybatis-learning/springmvc/springmvc学习笔记(19)-RESTful支持.md",
+		"/E/JAVA/springmvc-mybatis-learning/springmvc/springmvc学习笔记(2)-非注解的处理器映射器和适配器.md",
+		"/E/JAVA/springmvc-mybatis-learning/springmvc/springmvc学习笔记(20)-拦截器.md",
+		"/E/JAVA/springmvc-mybatis-learning/springmvc/springmvc学习笔记(21)-springmvc整合mybatis遇到的问题及解决小结.md",
+		"/E/JAVA/springmvc-mybatis-learning/springmvc/springmvc学习笔记(3)-注解的处理器映射器和适配器.md",
+		"/E/JAVA/springmvc-mybatis-learning/springmvc/springmvc学习笔记(4)-前端控制器.md",
+		"/E/JAVA/springmvc-mybatis-learning/springmvc/springmvc学习笔记(5)-入门程序小结.md",
+		"/E/JAVA/springmvc-mybatis-learning/springmvc/springmvc学习笔记(6)-springmvc整合mybatis(IDEA中通过maven构建).md",
+		"/E/JAVA/springmvc-mybatis-learning/springmvc/springmvc学习笔记(7)-springmvc整合mybatis之mapper.md"
 	],
 	"find":
 	{
@@ -731,6 +757,7 @@
 		"height": 169.0,
 		"where_history":
 		[
+			"E:\\JAVA\\springmvc-mybatis-learning"
 		]
 	},
 	"find_state":
@@ -738,6 +765,10 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"mybatis001?characterEncoding=utf-8",
+			"120.25.162.238",
+			"> 作者[@brianway](http://brianway.github.io/)更多文章：[个人网站](http://brianway.github.io/) `|` [CSDN](http://blog.csdn.net/h3243212/) `|` [oschina](http://my.oschina.net/brianway)",
+			"com.iot"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -745,6 +776,10 @@
 		"regex": false,
 		"replace_history":
 		[
+			"mybatis_demo?characterEncoding=utf-8&amp;useSSL=false",
+			"192.168.1.8",
+			"[云南网](http://www.yunnan.ws/)",
+			"cn.tekin"
 		],
 		"reverse": false,
 		"show_context": false,
@@ -755,8 +790,243 @@
 	"groups":
 	[
 		{
+			"selected": 1,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "mybatis/mybatis学习笔记(5)-配置文件.md",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5565,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5519,
+								5519
+							]
+						],
+						"settings":
+						{
+							"c_time":
+							[
+								128,
+								3,
+								99,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								113,
+								0,
+								67,
+								10,
+								7,
+								226,
+								5,
+								11,
+								23,
+								51,
+								51,
+								5,
+								220,
+								252,
+								113,
+								1,
+								133,
+								113,
+								2,
+								82,
+								113,
+								3,
+								46
+							],
+							"color_helper.box_height": 29,
+							"color_helper.color_scheme": "Packages/Color Scheme - Default/Monokai.tmTheme",
+							"color_helper.file_palette":
+							[
+							],
+							"color_helper.preview_meta":
+							{
+							},
+							"color_helper.scan":
+							{
+								"allowed_colors":
+								[
+									"rgba",
+									"hex",
+									"rgb",
+									"webcolors",
+									"hsl",
+									"hex_compressed",
+									"hsla"
+								],
+								"compress_hex_output": true,
+								"current_ext": ".md",
+								"current_syntax": "Markdown/Markdown",
+								"enabled": true,
+								"last_updated": 1526124745.04,
+								"scan_completion_scopes":
+								[
+								],
+								"scan_scopes":
+								[
+									"meta.declaration-list.css -support.type.property-name.css -comment -string",
+									"meta.property-value.css -comment -string",
+									"meta.value.css -comment -string",
+									"meta.tag.inline.any.html string.quoted -constant.character.entity.html",
+									"meta.tag.any.html meta.attribute-with-value.style.html"
+								],
+								"use_hex_argb": false
+							},
+							"syntax": "Packages/Markdown/Markdown.sublime-syntax",
+							"tab_size": 2,
+							"tabs_extra_spawned": true,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 8085.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "mybatis/mybatis学习笔记(6)-输入映射.md",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2543,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2451,
+								2451
+							]
+						],
+						"settings":
+						{
+							"c_time":
+							[
+								128,
+								3,
+								99,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								100,
+								97,
+								116,
+								101,
+								116,
+								105,
+								109,
+								101,
+								10,
+								113,
+								0,
+								67,
+								10,
+								7,
+								226,
+								5,
+								11,
+								23,
+								51,
+								51,
+								5,
+								224,
+								221,
+								113,
+								1,
+								133,
+								113,
+								2,
+								82,
+								113,
+								3,
+								46
+							],
+							"color_helper.box_height": 29,
+							"color_helper.color_scheme": "Packages/Color Scheme - Default/Monokai.tmTheme",
+							"color_helper.file_palette":
+							[
+							],
+							"color_helper.preview_meta":
+							{
+							},
+							"color_helper.scan":
+							{
+								"allowed_colors":
+								[
+									"rgba",
+									"hex",
+									"rgb",
+									"webcolors",
+									"hsl",
+									"hex_compressed",
+									"hsla"
+								],
+								"compress_hex_output": true,
+								"current_ext": ".md",
+								"current_syntax": "Markdown/Markdown",
+								"enabled": true,
+								"last_updated": 1526124745.04,
+								"scan_completion_scopes":
+								[
+								],
+								"scan_scopes":
+								[
+									"meta.declaration-list.css -support.type.property-name.css -comment -string",
+									"meta.property-value.css -comment -string",
+									"meta.value.css -comment -string",
+									"meta.tag.inline.any.html string.quoted -constant.character.entity.html",
+									"meta.tag.any.html meta.attribute-with-value.style.html"
+								],
+								"use_hex_argb": false
+							},
+							"syntax": "Packages/Markdown/Markdown.sublime-syntax",
+							"tab_size": 4,
+							"tabs_extra_last_activated": 1526140721.03,
+							"tabs_extra_last_activated_sheet_index": 1,
+							"tabs_extra_spawned": true,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2625.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -811,7 +1081,7 @@
 	"project": "sm.sublime-project",
 	"replace":
 	{
-		"height": 82.0
+		"height": 105.0
 	},
 	"save_all_on_build": true,
 	"select_file":
