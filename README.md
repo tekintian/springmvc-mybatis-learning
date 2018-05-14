@@ -1,23 +1,10 @@
-# 我的 springmvc + mybatis 学习笔记
-
-笔记分为两大部分: mybatis 和 springmvc
-
-- [mybatis](/mybatis)
-- [springmvc](/springmvc)
-
+# springmvc + mybatis 学习笔记
+本笔记转至 [brianway](http://brianway.github.io/) , 本人加入和更新了部分自己学习过程中的内容和代码。
 
 笔记内容主要是 mybatis 和 springmvc 的一些基本概念和使用方法，涉及概念介绍、环境搭建、编程细节、运行调试等方面。
 
-这套笔记整体偏入门和应用，适合快速上手，对底层实现和机理并未做过多分析。关于 spring 源码的学习笔记,可以参考我的另一个仓库[spring-learning](https://github.com/brianway/spring-learning)
-
 
 **如果觉得不错，请先在这个仓库上点个 star 吧**，这也是对我的肯定和鼓励，谢谢了。不定时进行调整和补充，需要关注更新的请 Watch、Star、Fork
-
-如果你只是单纯要阅读的话，建议移步 CSDN 或者 oschina 上观看，访问速度快很多：
-
->* CSDN:[springmvc+mybatis学习笔记(汇总)](http://blog.csdn.net/h3243212/article/details/51016271)
->* oschina:[springmvc+mybatis学习笔记(汇总)](http://my.oschina.net/brianway/blog/649946)
-
 
 
 -----
@@ -44,31 +31,7 @@
     - [mybatis学习笔记(16)-mybatis整合ehcache.md](/mybatis/mybatis学习笔记(16)-mybatis整合ehcache.md)
     - [mybatis学习笔记(17)-spring和mybatis整合.md](/mybatis/mybatis学习笔记(17)-spring和mybatis整合.md)
     - [mybatis学习笔记(18)-mybatis逆向工程.md](/mybatis/mybatis学习笔记(18)-mybatis逆向工程.md)
-  - [springmvc](/springmvc)
-    - [springmvc学习笔记(1)-框架原理和入门配置.md](/springmvc/springmvc学习笔记(1)-框架原理和入门配置.md)
-    - [springmvc学习笔记(2)-非注解的处理器映射器和适配器.md](/springmvc/springmvc学习笔记(2)-非注解的处理器映射器和适配器.md)   
-    - [springmvc学习笔记(3)-注解的处理器映射器和适配器.md](/springmvc/springmvc学习笔记(3)-注解的处理器映射器和适配器.md)
-    - [springmvc学习笔记(4)-前端控制器.md](/springmvc/springmvc学习笔记(4)-前端控制器.md)
-    - [springmvc学习笔记(5)-入门程序小结.md](/springmvc/springmvc学习笔记(5)-入门程序小结.md)
-    - [springmvc学习笔记(6)-springmvc整合mybatis(IDEA中通过maven构建).md](/springmvc/springmvc学习笔记(6)-springmvc整合mybatis(IDEA中通过maven构建).md)
-    - [springmvc学习笔记(7)-springmvc整合mybatis之mapper.md](/springmvc/springmvc学习笔记(7)-springmvc整合mybatis之mapper.md)
-    - [springmvc学习笔记(8)-springmvc整合mybatis之service.md](/springmvc/springmvc学习笔记(8)-springmvc整合mybatis之service.md)
-    - [springmvc学习笔记(9)-springmvc整合mybatis之controller.md](/springmvc/springmvc学习笔记(9)-springmvc整合mybatis之controller.md)
-    - [springmvc学习笔记(10)-springmvc注解开发之商品修改功能.md](/springmvc/springmvc学习笔记(10)-springmvc注解开发之商品修改功能.md)
-    - [springmvc学习笔记(11)-springmvc注解开发之简单参数绑定.md](/springmvc/springmvc学习笔记(11)-springmvc注解开发之简单参数绑定.md)
-    - [springmvc学习笔记(12)-springmvc注解开发之包装类型参数绑定.md](/springmvc/springmvc学习笔记(12)-springmvc注解开发之包装类型参数绑定.md)
-    - [springmvc学习笔记(13)-springmvc注解开发之集合类型参数绑定.md](/springmvc/springmvc学习笔记(13)-springmvc注解开发之集合类型参数绑定.md)
-    - [springmvc学习笔记(14)-springmvc校验.md](/springmvc/springmvc学习笔记(14)-springmvc校验.md)
-    - [springmvc学习笔记(15)-数据回显.md](/springmvc/springmvc学习笔记(15)-数据回显.md)
-    - [springmvc学习笔记(16)-异常处理器.md](/springmvc/springmvc学习笔记(16)-异常处理器.md)
-    - [springmvc学习笔记(17)-上传图片.md](/springmvc/springmvc学习笔记(17)-上传图片.md)
-    - [springmvc学习笔记(18)-json数据交互.md](/springmvc/springmvc学习笔记(18)-json数据交互.md)
-    - [springmvc学习笔记(19)-RESTful支持.md](/springmvc/springmvc学习笔记(19)-RESTful支持.md)
-    - [springmvc学习笔记(20)-拦截器.md](/springmvc/springmvc学习笔记(20)-拦截器.md)
-    - [springmvc学习笔记(21)-springmvc整合mybatis遇到的问题及解决小结.md](/springmvc/springmvc学习笔记(21)-springmvc整合mybatis遇到的问题及解决小结.md)
-    - [springmvc学习笔记(22)-springmvc开发小结.md](/springmvc/springmvc学习笔记(22)-springmvc开发小结.md)
 
-	
 -----
 
 ## 安装和使用
@@ -89,19 +52,11 @@
 - 导入 [sourcecode/sql](/sourcecode/sql) 中的 [data.sql](/sourcecode/sql/data.sql) 添加测试数据
 
 
-在IDE中添加 tomcat 容器:
-
-- ToolBar -> 运行按钮旁边的下拉 -> "Edit Configurations" -> "+" -> "Tomcat Server" 选 local,[如图所示](http://7xph6d.com1.z0.glb.clouddn.com/IDEA_web-%E6%B7%BB%E5%8A%A0tomcat-01.png)
-- 如果是第一次添加,还需要配置 tomcat 的路径,[如图所示](http://7xph6d.com1.z0.glb.clouddn.com/IDEA_web-%E6%B7%BB%E5%8A%A0tomcat-02.png)
-
-
 
 源码导入:
 
 - 将 sourcecode 中的任意子文件夹拷贝出来作为项目根目录,打开即可
 - 每个子文件夹的项目请参考 [sourcecode 说明](#sourcecode说明)
-
-
 
 
 -----
@@ -126,17 +81,13 @@
 
 如果您觉得该项目对您有帮助，请扫描下方二维码对我进行鼓励，以便我更好的维护和更新，谢谢支持！
 
-![支付宝](http://brianway.github.io/assets/images/alipay_small.png)
-![微信](http://brianway.github.io/assets/images/wechatpay_small.png)
+![支付宝](http://yunnan.ws/pay/tekin/pay.jpg)
 
 
-## 联系作者
 
-- [Brian's Personal Website](http://brianway.github.io/)
-- [CSDN](http://blog.csdn.net/h3243212/)
-- [oschina](http://my.oschina.net/brianway)
+- [My Github Page](http://tekin.yunnan.ws/)
+- [云南网](http://yunnan.ws/)
 
-Email: weichuyang@163.com
 
 -----
 
