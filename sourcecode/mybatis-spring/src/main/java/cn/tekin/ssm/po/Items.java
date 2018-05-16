@@ -2,6 +2,9 @@ package cn.tekin.ssm.po;
 
 import java.util.Date;
 
+/**
+ * Items对象
+ */
 public class Items {
     private Integer id;
 

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="ItemsMapper">
+<mapper namespace="cn.tekin.ssm.mapper.ItemsMapper">
+
     <resultMap id="BaseResultMap" type="Items">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
@@ -8,9 +9,11 @@
         <result column="pic" property="pic" jdbcType="VARCHAR"/>
         <result column="createtime" property="createtime" jdbcType="TIMESTAMP"/>
     </resultMap>
+
     <resultMap id="ResultMapWithBLOBs" type="Items" extends="BaseResultMap">
         <result column="detail" property="detail" jdbcType="LONGVARCHAR"/>
     </resultMap>
+
     <sql id="Example_Where_Clause">
         <where>
             <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -124,10 +127,8 @@
         </if>
     </delete>
     <insert id="insert" parameterType="Items">
-        insert into items (id, name, price,
-        pic, createtime, detail
-        )
-        values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{price,jdbcType=REAL},
+        insert into items ( name, price,pic, createtime, detail)
+        values (#{name,jdbcType=VARCHAR}, #{price,jdbcType=REAL},
         #{pic,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{detail,jdbcType=LONGVARCHAR}
         )
     </insert>
