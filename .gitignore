@@ -17,3 +17,5 @@ target/
 
 # out
 **/out/
+/*.sublime-workspace
+/*.sublime-project
